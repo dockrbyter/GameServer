@@ -23,6 +23,7 @@ https://github.com/thelamescriptkiddiemax/GameServer
 #--- Variables ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $steamappid = "443030"                          # Game Server Steam App ID                              EX 443030
+$gamename = "ConanExiles"                       # Name of the Game                                      EX Ark
 $gameinstance = "01"                            # Instance (Number) of the game server                  EX 01
 $gamemods = "880454836,880454836"               # Mods on the Server                                    EX 880454836,880454836
 
@@ -34,9 +35,7 @@ $rootgamesrvDIR = "GameServerInstallationen"    # Name of game server directory 
 $rootgamesrvPATH = "C:"                         # Path to the game server directory                     EX C:\stuff\morestuff\
 $savegame = "ConanSandbox\Saved"                # Path to the savegames inside the game directory       EX "ConanSandbox\Saved
 $saveconfig = "$savegame\Config\WindowsServer"  # Path to the config files inside the game directory    EX $savegame\Config\WindowsServer
-$gameEXE = "ConanSandboxServer.exe"             # Path and name of game exe inside game directory       EX ShooterGame\Binaries\Win64\ShooterGameServer.exe
-
-$pfadBackup = "$rootgamesrv\Backup"             # Path to the backups                                   EX $rootgamesrv\Backup
+$gameEXE = "ConanSandbox\Binaries\Win64\ConanSandboxServer-Win64-Test.exe"             # Path and name of game exe inside game directory       EX ShooterGame\Binaries\Win64\ShooterGameServer.exe
 
 $steamlogin = "anonymous"                       # Steam login name                                      EX anonymous
 
@@ -44,10 +43,11 @@ $steamlogin = "anonymous"                       # Steam login name              
 #--- Vorbereitung -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 $stringhost = [System.String]::Concat("[ ", $env:UserName, " @ ", $env:computername, " @ ", ((Get-WmiObject Win32_ComputerSystem).Domain), " ", (Get-CimInstance Win32_OperatingSystem | Select-Object Caption), ": ", 
-((Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\" -Name ReleaseID).ReleaseId), " ]   ", (Get-Date -Format "dd/MM/yyyy HH:mm:ss"), "`n", "[ ", $MyInvocation.MyCommand.Name, " ]", "`n","`n") 
+((Get-ItemProperty "HKLM:\SOFTWARE\Microsoft\Windows NT\CurrentVersion\" -Name ReleaseID).ReleaseId), " ]   ", (Get-Date -Format "dd/MM/yyyy HH:mm"), "`n", "[ ", $MyInvocation.MyCommand.Name, " ]", "`n","`n") 
 $stringhost = $stringhost.replace("{Caption=Microsoft"," ").replace("}", " ")
 
 $steamdownloadlink = "http://media.steampowered.com/installer/steamcmd.zip"
+
 
 $steamCMDfolder = "SteamCMD"
 $buso = "savegame"
@@ -56,10 +56,6 @@ $downloadfile = "steamcmd.zip"
 $rootgamesrv = ("$rootgamesrvPATH\$rootgamesrvDIR")
 $steamCMDdir = ("$rootgamesrv\$steamCMDfolder")
 $steamcmd = ("$steamCMDdir\steamcmd.exe")
-$backupDir = ("$pfadBackup\$gameinstancename")
-$backupDirT = ("$backupDir\$backuptime")
-$backupsavegameDir = ("$backupDirT\$buso")
-$backupconfigDir = ("$backupDirT\$buco")
 $expandpath = ("$steamCMDdir\$downloadfile")
 
 $stringrdfound = [System.String]::Concat("   Root directory ok :D `n   ", $rootgamesrv)
@@ -70,24 +66,23 @@ $stringsteamcmdfoundnot = [System.String]::Concat("   SteamCDM directory not fou
 $stringsteamcmdcreate = [System.String]::Concat("   SteamCDM directorycreated! `n   ", $steamCMDdir, "`n", "   Downloading SteamCMD...")
 $stringscmddownload = "   Download and extracting of SteamCMD complete! Zip-file deleted. `n   First run..."
 $stringscmdbereit = "   SteamCMD ready!"
-$stringbackup = [System.String]::Concat("   Starting backup... `n   ", $savegameDir, " to ", $backupsavegameDir, "`n   ", $saveconfigDir, " to ", $backupconfigDir)
-$stringnewbudir = [System.String]::Concat("   Created new backup directory `n   ", $backupDir)
-$stringbudone = [System.String]::Concat("`n   BACKUPS DONE! `n   Savegame: ", $backupsavegameDir, "`n   Config: ", $backupconfigDir)
 
+$Host.UI.RawUI.BackgroundColor = 'DarkGray'                                                                                                                      # Script Hintergrundfarbe
+$Host.UI.RawUI.ForegroundColor = 'White'                                                                                                                       # Script Textfarbe
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function headlinemuss {                                                                                                                                         # Show Headline
 
     #Clear-Host
     Write-Host $stringhost -ForegroundColor Magenta
-    Write-Host "    _  _  _  _  ____  ____                   " -ForegroundColor White
-    Write-Host "   ( \/ )/ )( \/ ___)/ ___)  ___             " -ForegroundColor White
-    Write-Host "   / \/ \) \/ (\___ \\___ \ (___)            " -ForegroundColor White
-    Write-Host "   \_)(_/\____/(____/(____/                  " -ForegroundColor White
-    Write-Host "    _  _   __   __ _   __    ___  ____  ____ " -ForegroundColor White
-    Write-Host "   ( \/ ) / _\ (  ( \ / _\  / __)(  __)(  _ \" -ForegroundColor White
-    Write-Host "   / \/ \/    \/    //    \( (_ \ ) _)  )   /" -ForegroundColor White
-    Write-Host "   \_)(_/\_/\_/\_)__)\_/\_/ \___/(____)(__\_)" -ForegroundColor White
+    Write-Host "    _  _  _  _  ____  ____                   " -ForegroundColor DarkRed
+    Write-Host "   ( \/ )/ )( \/ ___)/ ___)  ___             " -ForegroundColor DarkRed
+    Write-Host "   / \/ \) \/ (\___ \\___ \ (___)            " -ForegroundColor DarkRed
+    Write-Host "   \_)(_/\____/(____/(____/                  " -ForegroundColor DarkRed
+    Write-Host "    _  _   __   __ _   __    ___  ____  ____ " -ForegroundColor DarkRed
+    Write-Host "   ( \/ ) / _\ (  ( \ / _\  / __)(  __)(  _ \" -ForegroundColor DarkRed
+    Write-Host "   / \/ \/    \/    //    \( (_ \ ) _)  )   /" -ForegroundColor DarkRed
+    Write-Host "   \_)(_/\_/\_/\_)__)\_/\_/ \___/(____)(__\_)" -ForegroundColor DarkRed
     Write-Host " "
     Write-Host "------------------------------------------------------------------------------------" -ForegroundColor Cyan
     Write-Host "   Max's universal Steam Server - Manager " -ForegroundColor Green
@@ -121,8 +116,9 @@ else
 }
 
 # Check SteamCMD
+
 headlinemuss
-Write-Host "   Check root directory..."
+Write-Host "   Check SteamCMD directory..."
 Start-Sleep -Seconds 2
 
 if(!(Test-Path $steamCMDdir))                                                                                                                                   # If SteamCMD directory is not present
@@ -138,15 +134,16 @@ if(!(Test-Path $steamCMDdir))                                                   
     Start-Sleep -Seconds 2
 
     Invoke-WebRequest -Uri $steamdownloadlink -OutFile $expandpath                                                                                             # ...download SteamCMD from download link into SteamCMD directory...
-    Start-Job -scriptblock { Param($expandpath, $steamcmd) Expand-Archive -Path $expandpath -DestinationPath $steamcmd } -Name "extract"                                                                                   # ...unzip it..
-    Wait-Job -Name "extract"
-    #Remove-Item -Path $steamCMDdir\*.zip                                                                                                                        # ...remove zip-file...
-pause
+    Get-ChildItem $steamCMDdir -Filter *.zip | Expand-Archive -DestinationPath $steamCMDdir -Force
+    Remove-Item -Path $steamCMDdir\*.zip      
+
+    
     headlinemuss
     $stringscmddownload
     Start-Sleep -Seconds 2
 
     Start-Process -FilePath $steamcmd -ArgumentList 'validate +quit' -WindowStyle Hidden                                                                        # ...SteamCMD setup (first run)...
+    $steamcmdprocess = Get-Process steamcmd
     Wait-Process -Id $steamcmdprocess.Id                                                                                                                        # ...wait for SteamCMD...
 
     headlinemuss
@@ -163,30 +160,26 @@ else
 
 # Path building
 
-$gamename = $gamename | Select-String -Pattern "name" | Select-Object -First 1
-$gamename = $gamename.P3
-$gamename = $gamename.Replace("`"","")
 $gameinstancename = [System.String]::Concat("$gamename", "_" ,$gameinstance)
 $gameDir = ("$rootgamesrv\$gameinstancename")
 $savegameDir = ("$gameDir\$savegame")
 $saveconfigDir = ("$gameDir\$saveconfig")
 $gameEXEfull = ("$gameDir\$gameEXE")
 
-$gameprocess = get-process | Where-Object path -eq $gameEXEfull -ErrorAction SilentlyContinue
-$steamcmdprocess = Get-Process steamcmd
-$gamename = &.\$steamcmd +app_info_print $steamappid +quit
-$backuptime = (Get-Date -Format "dd.MM.yyyy_HH:mm")
+
+
+headlinemuss
+Write-Host "   ...preperations completed."
+Start-Sleep -Seconds 3
 
 
 #--- Verarbeitung -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Stopp Server
 headlinemuss
-Write-Host "   ...preperations completed."
-Start-Sleep -Seconds 3
-
-headlinemuss
 Write-Host  "   Check for running server..."
+
+$gameprocess = get-process | Where-Object path -eq $gameEXEfull -ErrorAction SilentlyContinue
 
 if($gameprocess)                                                                                                                                                # If game server is running...
 {
@@ -196,7 +189,7 @@ if($gameprocess)                                                                
     
     Stop-Process -Id $gameprocess.Id                                                                                                                            # ...stopp game server...
     Wait-Process -Id $gameprocess.Id                                                                                                                            # ...and wait for stopp.
-    
+    pause
     headlinemuss
     Write-Host "   ...server stopped."
     Start-Sleep -Seconds 2
@@ -214,26 +207,77 @@ headlinemuss
 Write-Host "   Backups..."
 Start-Sleep -Seconds 2
 
-if(Test-Path $savegameDir)                                                                                                                                      # If savegame directory is present...
-{
-    headlinemuss
-    Write-Host $stringbackup
-    Start-Sleep -Seconds 4
+$pfadBackup = ("$rootgamesrv\Backup")
+$backupDir = ("$pfadBackup\$gameinstancename")
+$backuptime = ((Get-Date).ToString("ddMMyyyy_HHmm"))
+$backupDirT = ("$backupDir\$backuptime")
+$backupsavegameDir = ("$backupDirT\$buso")
+$backupconfigDir = ("$backupDirT\$buco")
+$savegameDir = ("$gameDir\$savegame")
+$saveconfigDir = ("$gameDir\$saveconfig")
 
-    if(!(Test-Path $backupDir))                                                                                                                                 # ...check if backup directory is present...
+
+
+
+$stringbudone = [System.String]::Concat("`n   BACKUPS DONE! `n   Savegame: ", $backupsavegameDir, "`n   Config: ", $backupconfigDir)
+
+
+# If BackupDir not present create it
+if(!(Test-Path $backupDir))                                                                                                                                 # ...check if backup directory is present...
     {
         New-Item -Path $pfadBackup -Name $gameinstancename -ItemType "directory"                                                                                # ...create if not...
+        $stringnewbudir = [System.String]::Concat("   Created new backup directory `n   ", $backupDir)
 
         headlinemuss
         Write-Host $stringnewbudir
         Start-Sleep -Seconds 2
     }
 
+$stringbackup = [System.String]::Concat("   Starting backup... `n   ", $savegameDir, " to ", $backupsavegameDir, "`n   ", $saveconfigDir, " to ", $backupconfigDir)
+
+# If SavegameDir contains files backup them
+if(Test-Path $savegameDir)                                                                                                                                      # If savegame directory is present...
+{
+    headlinemuss
+    Write-Host $stringbackup
+    Start-Sleep -Seconds 4
+
+
+
     New-Item -Path $backupDir -Name $backuptime -ItemType "directory"                                                                                           # ...then create directory with time stamp...
     New-Item -Path $backupDirT -Name $buso -ItemType "directory"                                                                                                # ...create inside timestamp savegame directory...
+    
+    Copy-Item -Path $savegameDir -Destination $backupsavegameDir -Recurse                                                                                       # ...copy savegame to savegame backup...
+    
+    headlinemuss
+    $stringbudone
+    Start-Sleep -Seconds 4
+
+}
+else 
+{
+    headlinemuss
+    Write-Host "   No savegames to backup..."                                                                                                                        # ...else write noothing to backup.
+    Start-Sleep -Seconds 2
+   
+}
+
+
+
+# If ConfigDir contains files backup them
+if(Test-Path $saveconfig)                                                                                                                                      # If savegame directory is present...
+{
+    headlinemuss
+    Write-Host $stringbackup
+    Start-Sleep -Seconds 4
+
+    # If backupDir\gameinstance\timestamp is not present create it
+    if (!(Test-Path $backupDirT)) {
+        New-Item -Path $backupDir -Name $backuptime -ItemType "directory"
+    }
+
     New-Item -Path $backupDirT -Name $buco -ItemType "directory"                                                                                                # ...create inside timestamp savegame directory...
 
-    Copy-Item -Path $savegameDir -Destination $backupsavegameDir -Recurse                                                                                       # ...copy savegame to savegame backup...
     Copy-Item -Path $saveconfig -Destination $backupconfigDir -Recurse                                                                                          # ...copy config to config backup...
 
     headlinemuss
@@ -244,7 +288,7 @@ if(Test-Path $savegameDir)                                                      
 else 
 {
     headlinemuss
-    Write-Host "   Nothing to backup..."                                                                                                                        # ...else write noothing to backup.
+    Write-Host "   No config files to backup..."                                                                                                                        # ...else write noothing to backup.
     Start-Sleep -Seconds 2
    
 }
@@ -256,7 +300,10 @@ headlinemuss
 Write-Host "   Server setup..."
 Start-Sleep -Seconds 2
 
-&.\$steamcmd +login $steamlogin +force_install_dir $gameDir +app_update $steamappid +validate +quit                                                             # Download and install server files in SteamCMD
+$argumentlist1 = "+login $steamlogin +force_install_dir $gameDir +app_update $steamappid +validate +quit"
+
+Start-Process -FilePath $steamcmd -ArgumentList $argumentlist1                                                             # Download and install server files in SteamCMD
+$steamcmdprocess = Get-Process steamcmd
 Wait-Process -Id $steamcmdprocess.Id                                                                                                                            # Wait for SteamCMD
 
 headlinemuss
@@ -272,7 +319,10 @@ if ($gamemods)                                                                  
 
         foreach ($gamemod in $gamemods)
         {
-            &.\$steamcmd +login $steamlogin +workshop_download_item $steamappid $gamemod +validate +quit                                                        # ...download and install mod files in SteamCMD for each mod
+            $argumentlist2 = "+login $steamlogin +workshop_download_item $steamappid $gamemod +validate +quit"
+            
+            Start-Process -FilePath $steamcmd -ArgumentList $argumentlist2                                                         # ...download and install mod files in SteamCMD for each mod
+            $steamcmdprocess = Get-Process steamcmd
             Wait-Process -Id $steamcmdprocess.Id                                                                                                                # ...and wait for SteamCMD...
         }
 
@@ -304,7 +354,7 @@ if (Test-Path $backupDir)                                                       
 # Start Server
 headlinemuss
 Write-Host "   Starting game server..."
-&.\$gameEXEfull $gamesrvParameter                                                                                                                               # Start game server
+Start-Process -FilePath $gameEXEfull -ArgumentList $gamesrvParameter                                                                                                                               # Start game server
 
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
