@@ -58,14 +58,14 @@ $steamCMDdir = ("$rootgamesrv\$steamCMDfolder")
 $steamcmd = ("$steamCMDdir\steamcmd.exe")
 $expandpath = ("$steamCMDdir\$downloadfile")
 
-$stringrdfound = [System.String]::Concat("   Root directory ok :D `n   ", $rootgamesrv)
-$stringrdfoundnot = [System.String]::Concat("   Root directory not found -,- Create new directory... `n   ", $rootgamesrv)
-$stringrdcreate = [System.String]::Concat("   Root directory created! `n   ", $rootgamesrv)
-$stringsteamcmdfound = [System.String]::Concat("   SteamCDM directory ok :D  `n   ", $steamCMDdir)
-$stringsteamcmdfoundnot = [System.String]::Concat("   SteamCDM directory not found! :/ Create new directory... `n   ", $steamCMDdir)
-$stringsteamcmdcreate = [System.String]::Concat("   SteamCDM directorycreated! `n   ", $steamCMDdir, "`n", "   Downloading SteamCMD...")
-$stringscmddownload = "   Download and extracting of SteamCMD complete! Zip-file deleted. `n   First run..."
-$stringscmdbereit = "   SteamCMD ready!"
+$stringrdfound = [System.String]::Concat("   Root directory ok :D `n   ", $rootgamesrv, "`n")
+$stringrdfoundnot = [System.String]::Concat("   Root directory not found -,- Create new directory... `n   ", $rootgamesrv, "`n")
+$stringrdcreate = [System.String]::Concat("   Root directory created! `n   ", $rootgamesrv, "`n")
+$stringsteamcmdfound = [System.String]::Concat("   SteamCDM directory ok :D  `n   ", $steamCMDdir, "`n")
+$stringsteamcmdfoundnot = [System.String]::Concat("   SteamCDM directory not found! :/ Create new directory... `n   ", $steamCMDdir, "`n")
+$stringsteamcmdcreate = [System.String]::Concat("   SteamCDM directorycreated! `n   ", $steamCMDdir, "`n", "     SteamCMD Download & Setup...`n     Please wait.. `n")
+$stringscmddownload = "   Download and extracting of SteamCMD complete! Zip-file deleted. `n   First run...`n"
+$stringscmdbereit = "   SteamCMD ready!`n"
 
 $Host.UI.RawUI.BackgroundColor = 'DarkGray'                                                                                                                      # Script Hintergrundfarbe
 $Host.UI.RawUI.ForegroundColor = 'White'                                                                                                                       # Script Textfarbe
@@ -93,7 +93,7 @@ function headlinemuss {                                                         
 
 # Check root directory
 headlinemuss
-Write-Host "   Check root directory..."
+Write-Host "   Check root directory...`n"
 Start-Sleep -Seconds 2
 
 if(!(Test-Path $rootgamesrv))                                                                                                                                   # If game server root directory is not present...
@@ -118,7 +118,7 @@ else
 # Check SteamCMD
 
 headlinemuss
-Write-Host "   Check SteamCMD directory..."
+Write-Host "   Check SteamCMD directory...`n"
 Start-Sleep -Seconds 2
 
 if(!(Test-Path $steamCMDdir))                                                                                                                                   # If SteamCMD directory is not present
@@ -169,7 +169,7 @@ $gameEXEfull = ("$gameDir\$gameEXE")
 
 
 headlinemuss
-Write-Host "   ...preperations completed."
+Write-Host "   ...preperations completed.`n"
 Start-Sleep -Seconds 3
 
 
@@ -184,27 +184,27 @@ $gameprocess = get-process | Where-Object path -eq $gameEXEfull -ErrorAction Sil
 if($gameprocess)                                                                                                                                                # If game server is running...
 {
     headlinemuss
-    Write-Host "   Server is currently running.`n   Stopping Server..."
+    Write-Host "   Server is currently running.`n   Stopping Server...`n"
     Start-Sleep -Seconds 2
     
     Stop-Process -Id $gameprocess.Id                                                                                                                            # ...stopp game server...
     Wait-Process -Id $gameprocess.Id                                                                                                                            # ...and wait for stopp.
-    pause
+
     headlinemuss
-    Write-Host "   ...server stopped."
+    Write-Host "   ...server stopped.`n"
     Start-Sleep -Seconds 2
 }
 else 
 {
     headlinemuss
-    Write-Host "   Server is currently not running."                                                                                                            # ...else say that server is not running.
+    Write-Host "   Server is currently not running.`n"                                                                                                            # ...else say that server is not running.
     Start-Sleep -Seconds 2
    
 }
 
 # Backup
 headlinemuss
-Write-Host "   Backups..."
+Write-Host "   Preparing Backups...`n"
 Start-Sleep -Seconds 2
 
 $pfadBackup = ("$rootgamesrv\Backup")
@@ -219,45 +219,46 @@ $saveconfigDir = ("$gameDir\$saveconfig")
 
 
 
-$stringbudone = [System.String]::Concat("`n   BACKUPS DONE! `n   Savegame: ", $backupsavegameDir, "`n   Config: ", $backupconfigDir)
-
+$stringbudone1 = [System.String]::Concat("`n   SAVEGAME BACKUP DONE! `n   Savegame: ", $backupsavegameDir, "`n")
+$stringbudone2 = [System.String]::Concat("`n   CONFIG BACKUP DONE! `n   Config: ", $backupconfigDir, "`n")
 
 # If BackupDir not present create it
 if(!(Test-Path $backupDir))                                                                                                                                 # ...check if backup directory is present...
     {
         New-Item -Path $pfadBackup -Name $gameinstancename -ItemType "directory"                                                                                # ...create if not...
-        $stringnewbudir = [System.String]::Concat("   Created new backup directory `n   ", $backupDir)
+        $stringnewbudir = [System.String]::Concat("   Created new backup directory `n   ", $backupDir, "`n")
 
         headlinemuss
         Write-Host $stringnewbudir
         Start-Sleep -Seconds 2
     }
 
-$stringbackup = [System.String]::Concat("   Starting backup... `n   ", $savegameDir, " to ", $backupsavegameDir, "`n   ", $saveconfigDir, " to ", $backupconfigDir)
+$stringbackup1 = [System.String]::Concat("   Starting backup... `n   ", $savegameDir, "`n to `n", $backupsavegameDir, "`n")
+$stringbackup2 = [System.String]::Concat("   Starting backup... `n   ", $saveconfigDir, "`n to `n", $backupconfigDir, "`n")
 
 # If SavegameDir contains files backup them
 if(Test-Path $savegameDir)                                                                                                                                      # If savegame directory is present...
 {
     headlinemuss
-    Write-Host $stringbackup
+    Write-Host $stringbackup1
     Start-Sleep -Seconds 4
 
 
 
-    New-Item -Path $backupDir -Name $backuptime -ItemType "directory"                                                                                           # ...then create directory with time stamp...
-    New-Item -Path $backupDirT -Name $buso -ItemType "directory"                                                                                                # ...create inside timestamp savegame directory...
+    New-Item -Path $backupDir -Name $backuptime -ItemType "directory" | Out-Null                                                                                           # ...then create directory with time stamp...
+    New-Item -Path $backupDirT -Name $buso -ItemType "directory" | Out-Null                                                                                                # ...create inside timestamp savegame directory...
     
-    Copy-Item -Path $savegameDir -Destination $backupsavegameDir -Recurse                                                                                       # ...copy savegame to savegame backup...
+    Copy-Item -Path $savegameDir -Destination $backupsavegameDir -Recurse | Out-Null                                                                                       # ...copy savegame to savegame backup...
     
     headlinemuss
-    $stringbudone
+    $stringbudone1
     Start-Sleep -Seconds 4
 
 }
 else 
 {
     headlinemuss
-    Write-Host "   No savegames to backup..."                                                                                                                        # ...else write noothing to backup.
+    Write-Host "   No savegames to backup...`n"                                                                                                                        # ...else write noothing to backup.
     Start-Sleep -Seconds 2
    
 }
@@ -268,27 +269,27 @@ else
 if(Test-Path $saveconfig)                                                                                                                                      # If savegame directory is present...
 {
     headlinemuss
-    Write-Host $stringbackup
+    Write-Host $stringbackup2
     Start-Sleep -Seconds 4
 
     # If backupDir\gameinstance\timestamp is not present create it
     if (!(Test-Path $backupDirT)) {
-        New-Item -Path $backupDir -Name $backuptime -ItemType "directory"
+        New-Item -Path $backupDir -Name $backuptime -ItemType "directory" | Out-Null
     }
 
-    New-Item -Path $backupDirT -Name $buco -ItemType "directory"                                                                                                # ...create inside timestamp savegame directory...
+    New-Item -Path $backupDirT -Name $buco -ItemType "directory" | Out-Null                                                                                                # ...create inside timestamp savegame directory...
 
-    Copy-Item -Path $saveconfig -Destination $backupconfigDir -Recurse                                                                                          # ...copy config to config backup...
+    Copy-Item -Path $saveconfig -Destination $backupconfigDir -Recurse | Out-Null                                                                                          # ...copy config to config backup...
 
     headlinemuss
-    $stringbudone
+    $stringbudone2
     Start-Sleep -Seconds 4
 
 }
 else 
 {
     headlinemuss
-    Write-Host "   No config files to backup..."                                                                                                                        # ...else write noothing to backup.
+    Write-Host "   No config files to backup...`n"                                                                                                                        # ...else write noothing to backup.
     Start-Sleep -Seconds 2
    
 }
@@ -297,7 +298,7 @@ else
 
 # Setup
 headlinemuss
-Write-Host "   Server setup..."
+Write-Host "   Server setup...`n   ...please wait...`n"
 Start-Sleep -Seconds 2
 
 $argumentlist1 = "+login $steamlogin +force_install_dir $gameDir +app_update $steamappid +validate +quit"
@@ -307,14 +308,14 @@ $steamcmdprocess = Get-Process steamcmd
 Wait-Process -Id $steamcmdprocess.Id                                                                                                                            # Wait for SteamCMD
 
 headlinemuss
-Write-Host "   ...server setup done!"
+Write-Host "   ...server setup done!`n"
 Start-Sleep -Seconds 2
 
 if ($gamemods)                                                                                                                                                  # If mod-variable is set...
     {
     
         headlinemuss
-        Write-Host "   Mod setup..."
+        Write-Host "   Mod setup...`n"
         Start-Sleep -Seconds 2
 
         foreach ($gamemod in $gamemods)
@@ -327,36 +328,39 @@ if ($gamemods)                                                                  
         }
 
         headlinemuss
-        Write-Host "   ...mod setup done"
+        Write-Host "   ...mod setup done`n"
         Start-Sleep -Seconds 2
     }
     else 
     {
     headlinemuss
-    Write-Host "   ...no mods selected..."                                                                                                                      # ...else write no mods selected.
+    Write-Host "   ...no mods selected...`n"                                                                                                                      # ...else write no mods selected.
     Start-Sleep -Seconds 2
     }
 
-if (Test-Path $backupDir)                                                                                                                                       # If backup directory contains files...
+#if (Test-Path $backupDir)                                                                                                                                       # If backup directory contains files...
     {
     headlinemuss
-    Write-Host "   Rewrite confing..."
+    Write-Host "   Rewrite confing...`n"
     Start-Sleep -Seconds 2
     
     $rewriteconf = Get-ChildItem -Path $backupDir -Directory | Sort-Object LastAccessTime -Descending | Select-Object -Skip 1 -First 1 -ExpandProperty name     # ...find second youngest directory...
     Copy-Item -Path $backupDir\$rewriteconf -Destination $saveconfig -Recurse                                                                                   # ...copy config backup from it to config directory.
 
     headlinemuss
-    Write-Host "   ...config restored!"
+    Write-Host "   ...config restored!`n"
     Start-Sleep -Seconds 2
     }
 
 # Start Server
 headlinemuss
-Write-Host "   Starting game server..."
+Write-Host "   Starting game server...`n"
 Start-Process -FilePath $gameEXEfull -ArgumentList $gamesrvParameter                                                                                                                               # Start game server
+Start-Sleep -Seconds 3
 
-
+headlinemuss
+Write-Host "   Server starts now up! `n   Should be availiable in a few Minutes...`n`n Exit MUSS-Manager...`n`n`n`n"
+Start-Sleep -Seconds 8
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 #stop-process -Id $PID                                                                                                                                           # Close script
