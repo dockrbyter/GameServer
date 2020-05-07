@@ -22,7 +22,7 @@ muss-manager.ps1
     *** EXAMPLES ***************************************************
 
     Conan Exiles:
-    
+
 
 
 https://github.com/thelamescriptkiddiemax/GameServer
@@ -101,16 +101,6 @@ function waittimer {
     Start-Sleep -Seconds $scriptspeed
 }
 #--- Checks -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-pause
-
-waittimer
-
-Pause
-
-
-
-
 # Check root directory
 headlinemuss
 Write-Host "   Check root directory...`n"
@@ -361,7 +351,7 @@ if (Test-Path $backupDir)                                                       
     
     $rewriteconf = Get-ChildItem -Path $backupDir -Directory | Sort-Object LastAccessTime -Descending | Select-Object -First 1 -ExpandProperty name     # ...find second youngest directory...
     Copy-Item -Path $backupDir\$rewriteconf -Destination $saveconfig -Recurse                                                                                   # ...copy config backup from it to config directory.
-pause
+
     headlinemuss
     Write-Host "   ...config restored!`n"
     waittimer
