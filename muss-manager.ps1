@@ -4,25 +4,75 @@ muss-manager.ps1
 
     Max's universal Steam Server - Manager
     
-    Sadly there is no standard, so you have to edit some values in Variables
+    It's recomendet to create a copy of this script for each game server you
+    want to run. EX muss-manager_ARK01.ps1, muss-manager_ARK02.ps1, muss-manager_CSGO01.ps1, ...
 
+    Just edit the variables in lines 82 to 98
+        82 - 82 SERVERSETTINGS
+        Edit these values in each copy of the script for the corresponding game
+        96 - 98
+        Edit these values one time and keep them in each copy
 
-    For server setup - just run the script
+    You may have to tweak the parameters for SteamCMD and server start. You find them on the following lines:
+        355  Server Setuo   $argumentlist1
+        374  Mod Setuo      $argumentlist2
+        87  Server Start    $gamesrvParameter
 
-    For server management create nee scheduled task
-        - Select User: BSP LocalComputer\Users
-        - New Trigger: BSP At startup, oder at time
+    For server setup / launch - just run the script
+
+    For server management create new scheduled task
+        - Select User: EX LocalComputer\Users
+        - New Trigger: EX At startup, oder at time
         - Aktion: Start Programm
             * Powershell.exe
             * Arguments: -command .\muss-manager.ps1
             * Start in: Script directory
-            * Start only if network is available
+        - Start only if network is available
 
 
-    *** EXAMPLES ***************************************************
-
+    *** EXAMPLES ** YOUR CONFIG SHOULD LOOK LIKE THIS ********************************************************************************************************************
     Conan Exiles:
+        $steamappid = "376030"
+        $gamename = "ConanExiles"
+        $gameinstance = "01"
+        $gamemods = "880454836"
+        $steamlogin = "anonymous"
+        $gamesrvParameter = "-server -log"
 
+        $savegame = "ConanSandbox\Saved"
+        $saveconfig = "$savegame\Config\WindowsServer"
+        $gameEXE = "ConanSandbox\Binaries\Win64\ConanSandboxServer-Win64-Test.exe"
+
+
+    Ark Sruvival Evolved:
+        $steamappid = "443030"
+        $gamename = "ark"
+        $gameinstance = "theisland"
+        $gamemods = ""
+        $steamlogin = "anonymous"
+        $gamesrvParameter = "TheIsland?SessionName=MUSS-Ark-01?ServerPassword=sudo?ServerAdminPassword=cR4p?MaxPlayers=10 -server -log"
+
+        $savegame = "ShooterGame\Saved"
+        $saveconfig = "$savegame\Config\WindowsServer"
+        $gameEXE = "ShooterGame\Binaries\Win64\ShooterGameServer.exe"
+
+
+    Counter-Strike Global Offensive:
+        $steamappid = "740"
+        $gamename = "csgo"
+        $gameinstance = "01"
+        $gamemods = ""
+        $steamlogin = "YourSteamAccount"
+        $gamesrvParameter = "srcds -game csgo -console -usercon +game_type 0 +game_mode 0 +mapgroup mg_active +map de_dust2 +sv_setsteamaccount YourAuthToken"
+
+        $savegame = ""
+        $saveconfig = "$rootgamesrv"
+        $gameEXE = "$steamcmd"
+
+
+Steam Game Server Account Management:
+(to generate server auth tokens for games like csgo)
+https://steamcommunity.com/dev/managegameservers
 
 
 https://github.com/thelamescriptkiddiemax/GameServer
@@ -32,17 +82,19 @@ https://github.com/thelamescriptkiddiemax/GameServer
 $steamappid = "443030"                          # Game Server Steam App ID                              EX 443030
 $gamename = "ConanExiles"                       # Name of the Game                                      EX Ark
 $gameinstance = "01"                            # Instance (Number) of the game server                  EX 01
-$gamemods = "880454836,880454836"               # Mods on the Server                                    EX 880454836,880454836
+$gamemods = "880454836"                         # Mods on the Server                                    EX 880454836,880454836
 $steamlogin = "anonymous"                       # Steam login name                                      EX anonymous
 $gamesrvParameter = "-server -log"
                                                 # Game server start parameters                          EX MaxPlayers=20?listen?AdminPassword=AdminPW -server -log
 
-# SCRIPTSETTINGS
-$rootgamesrvDIR = "GameServerInstallationen"    # Name of game server directory                         EX GameServers
-$rootgamesrvPATH = "C:"                         # Path to the game server directory                     EX C:\stuff\morestuff\
 $savegame = "ConanSandbox\Saved"                # Path to the savegames inside the game directory       EX "ConanSandbox\Saved
 $saveconfig = "$savegame\Config\WindowsServer"  # Path to the config files inside the game directory    EX $savegame\Config\WindowsServer
 $gameEXE = "ConanSandbox\Binaries\Win64\ConanSandboxServer-Win64-Test.exe"             # Path and name of game exe inside game directory       EX ShooterGame\Binaries\Win64\ShooterGameServer.exe
+                                                
+
+# SCRIPTSETTINGS
+$rootgamesrvPATH = "C:"                         # Path to the game server directory                     EX C:\stuff\morestuff\
+$rootgamesrvDIR = "GameServerInstallationen"    # Name of game server directory                         EX GameServers
 $scriptspeed = "2"                              # Timespan to show messages in Seconds                  EX 2
 
 
@@ -126,7 +178,6 @@ else
 }
 
 # Check SteamCMD
-
 headlinemuss
 Write-Host "   Check SteamCMD directory...`n"
 waittimer
@@ -169,14 +220,11 @@ else
 }
 
 # Path building
-
 $gameinstancename = [System.String]::Concat("$gamename", "_" ,$gameinstance)
 $gameDir = ("$rootgamesrv\$gameinstancename")
 $savegameDir = ("$gameDir\$savegame")
 $saveconfigDir = ("$gameDir\$saveconfig")
 $gameEXEfull = ("$gameDir\$gameEXE")
-
-
 
 headlinemuss
 Write-Host "   ...preperations completed.`n"
@@ -253,7 +301,7 @@ if(Test-Path $savegameDir)                                                      
     New-Item -Path $backupDir -Name $backuptime -ItemType "directory" | Out-Null                                                                                           # ...then create directory with time stamp...
     New-Item -Path $backupDirT -Name $buso -ItemType "directory" | Out-Null                                                                                                # ...create inside timestamp savegame directory...
     
-    Copy-Item -Path $savegameDir -Destination $backupsavegameDir -Recurse | Out-Null                                                                                       # ...copy savegame to savegame backup...
+    Copy-Item -Path $savegameDir -Destination $backupsavegameDir | Out-Null                                                                                       # ...copy savegame to savegame backup...
     
     headlinemuss
     $stringbudone1
@@ -267,8 +315,6 @@ else
     waittimer
    
 }
-
-
 
 # If ConfigDir contains files backup them
 if(Test-Path $saveconfig)                                                                                                                                      # If savegame directory is present...
@@ -284,7 +330,7 @@ if(Test-Path $saveconfig)                                                       
 
     New-Item -Path $backupDirT -Name $buco -ItemType "directory" | Out-Null                                                                                                # ...create inside timestamp savegame directory...
 
-    Copy-Item -Path $saveconfig -Destination $backupconfigDir -Recurse | Out-Null                                                                                          # ...copy config to config backup...
+    Copy-Item -Path $saveconfig -Destination $backupconfigDir | Out-Null                                                                                          # ...copy config to config backup...
 
     headlinemuss
     $stringbudone2
@@ -364,7 +410,7 @@ Start-Process -FilePath $gameEXEfull -ArgumentList $gamesrvParameter            
 waittimer
 
 headlinemuss
-Write-Host "   Server starts now up! `n   Should be availiable in a few Minutes...`n`n Exit MUSS-Manager...`n`n`n`n"
+Write-Host "   Server starts up now! `n   Should be availiable in a few Minutes...`n`n Exit MUSS-Manager...`n`n`n`n"
 waittimer
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
