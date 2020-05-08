@@ -4,8 +4,8 @@ muss-manager.ps1
 
     Max's universal Steam Server - Manager
     
-    It's recomendet to create a copy of this script for each game server you
-    want to run. EX muss-manager_ARK01.ps1, muss-manager_ARK02.ps1, muss-manager_CSGO01.ps1, ...
+    It's recommended to create a copy of this script for each game server you
+    want to run. For example: muss-manager_ARK01.ps1, muss-manager_ARK02.ps1, muss-manager_CSGO01.ps1, ....
 
     Just edit the variables in lines 82 to 98
         82 - 82 SERVERSETTINGS
@@ -95,6 +95,7 @@ $gameEXE = "ConanSandbox\Binaries\Win64\ConanSandboxServer-Win64-Test.exe"      
 # SCRIPTSETTINGS
 $rootgamesrvPATH = "C:"                         # Path to the game server directory                     EX C:\stuff\morestuff\
 $rootgamesrvDIR = "GameServerInstallationen"    # Name of game server directory                         EX GameServers
+$pfadBackup = ("$rootgamesrv\Backup")           # Path to the backup
 $scriptspeed = "2"                              # Timespan to show messages in Seconds                  EX 2
 
 
@@ -266,7 +267,6 @@ headlinemuss
 Write-Host "   Preparing Backups...`n"
 waittimer
 
-$pfadBackup = ("$rootgamesrv\Backup")
 $backupDir = ("$pfadBackup\$gameinstancename")
 $backuptime = ((Get-Date).ToString("ddMMyyyy_HHmm"))
 $backupDirT = ("$backupDir\$backuptime")
