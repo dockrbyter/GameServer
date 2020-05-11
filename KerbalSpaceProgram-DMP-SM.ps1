@@ -150,6 +150,9 @@ if(!(Test-Path $gameinstanceDIR))                                               
     Invoke-WebRequest -Uri $dllServer -OutFile $expandpath1
     Invoke-WebRequest -Uri $dllUpdater -OutFile $expandpath2
     Get-ChildItem $gameinstanceDIR -Filter *.zip | Expand-Archive -DestinationPath $gameinstanceDIR -Force
+    
+    Get-ChildItem -Path $gameinstanceDIR\DMPServer -Recurse -File | Move-Item -Destination $gameinstanceDIR
+    Remove-Item $gameinstanceDIR\DMPServer -Recurse
     Remove-Item -Path $gameinstanceDIR\*.zip
 
     headlinekspdmp
