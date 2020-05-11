@@ -10,7 +10,7 @@ KerbalSpaceProgram-DMP-SM.ps1
     Checkout their website: https://d-mp.org
 
 
-    Edit the values in lines 30 to 37 corresponding to your environment
+    Edit the values in lines 30 to 38 corresponding to your environment
 
     For server setup / launch - just run the script
 
@@ -34,7 +34,9 @@ $gameinstance = "01"                                        # Instance (Number) 
 # SCRIPTSETTINGS
 $rootgamesrvPATH = "C:"                                     # Path to the game server directory                     EX C:\stuff\morestuff\
 $rootgamesrvDIR = "GameServer"                              # Name of game server directory                         EX GameServer
-$scriptspeed = "2"                                          # Timespan to show messages in Seconds                  EX 2
+$scriptspeed = "4"                                          # Timespan to show messages in Seconds                  EX 2
+$updatetime = "10"                                          # Timespan to wait for updates in Seconds               EX 10
+
 
 #--- Vorbereitung -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 $stringhost = [System.String]::Concat("[ ", $env:UserName, " @ ", $env:computername, " @ ", ((Get-WmiObject Win32_ComputerSystem).Domain), " ", (Get-CimInstance Win32_OperatingSystem | Select-Object Caption), ": ", 
@@ -51,8 +53,8 @@ $updateEXEname = "DMPUpdater.exe"
 $rootgamesrv = ("$rootgamesrvPATH\$rootgamesrvDIR")
 $gameinstancename = [System.String]::Concat("$gamename", "_" ,$gameinstance)
 $gameinstanceDIR = ("$rootgamesrv\$gameinstancename")
-$gameconfigDIR = ("$gameinstanceDIR\$gameconfigFolder")
-$savegameDIR = ("$gameinstanceDIR\$savegameFolder")
+$gameconfigDIR = ("$gameinstanceDIR\$gameconfigFolder\*")
+$savegameDIR = ("$gameinstanceDIR\$savegameFolder\*")
 $gameEXE = ("$gameinstancename\$gameEXEname")
 $updateEXE = ("$gameinstancename\$updateEXEname")
 $dlfileServer = "DMPServer.zip"
@@ -62,20 +64,19 @@ $expandpath2 = ("$gameinstanceDIR\$dlfileUpdater")
 $pfadBackup = ("$rootgamesrv\Backup")
 
 
-$stringrdfound = [System.String]::Concat("   Root directory ok :D `n   ", $rootgamesrv, "`n")
-$stringrdfoundnot = [System.String]::Concat("   Root directory not found -,- Create new directory... `n   ", $rootgamesrv, "`n")
-$stringrdcreate = [System.String]::Concat("   Root directory created! `n   ", $rootgamesrv, "`n")
-
+$stringrdfound = [System.String]::Concat("`n   Root directory ok :D `n   ", $rootgamesrv, "`n")
+$stringrdfoundnot = [System.String]::Concat("`n   Root directory not found -,- Create new directory... `n   ", $rootgamesrv, "`n")
+$stringrdcreate = [System.String]::Concat("`n   Root directory created! `n   ", $rootgamesrv, "`n")
+$stringupdate = [System.String]::Concat("`n   Updating... Delay: ", $updatetime, " Seconds `n")
 
 $Host.UI.RawUI.BackgroundColor = 'DarkGray'
 $Host.UI.RawUI.ForegroundColor = 'White'
 
-Write-Host " `n `n `n_"
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 function headlinekspdmp {
 
-    #Clear-Host
+    Clear-Host
     Write-Host $stringhost -ForegroundColor Magenta
     Write-Host "      _  __ ____  ____  " -ForegroundColor Green
     Write-Host "     / |/ // ___\/  __\ " -ForegroundColor Green
@@ -108,7 +109,7 @@ function waittimer {
 
 # Check root directory
 headlinekspdmp
-Write-Host "   Check root directory...`n"
+Write-Host "`n   Check root directory...`n"
 waittimer
 
 if(!(Test-Path $rootgamesrv))                                                                                               # If game server root directory is not present...
@@ -117,7 +118,7 @@ if(!(Test-Path $rootgamesrv))                                                   
     Write-Host $stringrdfoundnot
     waittimer
     
-    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory"                                             # ...create it...
+    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory" | Out-Null                                             # ...create it...
     
     headlinekspdmp
     $stringrdcreate
@@ -132,19 +133,19 @@ else
 
 # Check game server directory
 headlinekspdmp
-Write-Host "   Check game server directory...`n"
+Write-Host "`n   Check game server directory...`n"
 waittimer
 
 if(!(Test-Path $gameinstanceDIR))                                                                                           # If game server root directory is not present...
 {
     headlinekspdmp
-    Write-Host "   Game server directory not found! `n   Create directory and download KSP-DMP... `n"
+    Write-Host "`n   Game server directory not found! `n   Create directory and download KSP-DMP... `n"
     waittimer
     
-    New-Item -Path $rootgamesrv -Name $gameinstancename -ItemType "directory"                                               # ...create it...
+    New-Item -Path $rootgamesrv -Name $gameinstancename -ItemType "directory" | Out-Null                                              # ...create it...
     
     headlinekspdmp
-    Write-Host "   Directory created! Downloading KSP-DMP... `n"
+    Write-Host "`n   Directory created! Downloading KSP-DMP... `n"
     waittimer
 
     Invoke-WebRequest -Uri $dllServer -OutFile $expandpath1
@@ -156,20 +157,20 @@ if(!(Test-Path $gameinstanceDIR))                                               
     Remove-Item -Path $gameinstanceDIR\*.zip
 
     headlinekspdmp
-    Write-Host "   Downloads complete! First run... `n"
+    Write-Host "`n   Downloads complete! First run... `n"
     waittimer
     
     Start-Process -FilePath $gameEXE -WindowStyle Hidden
-    $gameprocess = get-process | Where-Object path -eq $gameEXE -ErrorAction SilentlyContinue
+    $gameprocess = (Get-Process -Name "*DMPServer*").Name
     Start-Sleep -Seconds 5
-    Stop-Process -Id $gameprocess.Id
-
+    Stop-Process -Name $gameprocess                                                                                        # ...stopp game server...
+    Wait-Process -Name $gameprocess                                                                                        # ...and wait for stopp.
     
 }
 else
 {
     headlinekspdmp
-    Write-Host "   Game server directory found! `n   Check status... `n"                                                    # ...else write game server root directory is present.
+    Write-Host "`n   Game server directory found! `n   Check status... `n"                                                    # ...else write game server root directory is present.
     waittimer 
 }
 
@@ -177,40 +178,41 @@ else
 #--- Verarbeitung -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Stopp Server
-headlinemuss
-Write-Host  "   Check for running server... `n"
+headlinekspdmp
+Write-Host  "`n   Check for running server... `n"
 waittimer
 
-$gameprocess = get-process | Where-Object path -eq $gameEXE -ErrorAction SilentlyContinue
+$gameprocess = (Get-Process -Name "*DMPServer*").Name
 
 if($gameprocess)                                                                                                            # If game server is running...
 {
-    headlinemuss
-    Write-Host "   Server is currently running.`n   Stopping Server...`n"
+    headlinekspdmp
+    Write-Host "`n   Server is currently running.`n   Stopping Server...`n"
     waittimer
     
-    Stop-Process -Id $gameprocess.Id                                                                                        # ...stopp game server...
-    Wait-Process -Id $gameprocess.Id                                                                                        # ...and wait for stopp.
+    Stop-Process -Name $gameprocess                                                                                        # ...stopp game server...
+    Wait-Process -Name $gameprocess                                                                                        # ...and wait for stopp.
 
-    headlinemuss
-    Write-Host "   ...server stopped.`n"
+    headlinekspdmp
+    Write-Host "`n   ...server stopped.`n"
     waittimer
 }
 else 
 {
-    headlinemuss
-    Write-Host "   Server is currently not running.`n"                                                                      # ...else say that server is not running.
+    headlinekspdmp
+    Write-Host "`n   Server is currently not running.`n"                                                                      # ...else say that server is not running.
     waittimer
    
 }
 
 # Backup
-headlinemuss
-Write-Host "   Preparing Backups...`n"
+headlinekspdmp
+Write-Host "`n   Preparing Backups...`n"
 waittimer
 
 $backuptime = ((Get-Date).ToString("ddMMyyyy_HHmm"))
-$pfadBackupNOW = ("$pfadBackup\$backuptime")
+$pfadBackupGame = ("$pfadBackup\$gameinstancename")
+$pfadBackupNOW = ("$pfadBackupGame\$backuptime")
 $backupConfigDIR = ("$pfadBackupNOW\$gameconfigFolder")
 $backuSavegameDIR = ("$pfadBackupNOW\$savegameFolder")
 
@@ -224,7 +226,7 @@ if(!(Test-Path $pfadBackup))
     Write-Host $stringbudirnot
     waittimer
     
-    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory"
+    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory" | Out-Null
     
     headlinekspdmp
     $stringrdcreate
@@ -233,7 +235,27 @@ if(!(Test-Path $pfadBackup))
 else
 {
     headlinekspdmp
-    Write-Host "   Backup directory found...`n"
+    Write-Host "`n   Backup directory found...`n"
+    waittimer 
+}
+
+# Check Backup Game Directory
+if(!(Test-Path $pfadBackupGame))
+{
+    headlinekspdmp
+    Write-Host "`n   Backup gameinstance directory not found! Creating..."
+    waittimer
+    
+    New-Item -Path $pfadBackup -Name $gameinstancename -ItemType "directory" | Out-Null
+    
+    headlinekspdmp
+    Write-Host "`n   Backup gameinstance directory created!`n"
+    waittimer
+}
+else
+{
+    headlinekspdmp
+    Write-Host "`n   Backup gameinstance directory found :D`n"
     waittimer 
 }
 
@@ -241,43 +263,44 @@ headlinekspdmp
 Write-Host $stringbackupheute
 waittimer
 
-New-Item -Path $pfadBackup -Name $backuptime -ItemType "directory"
-New-Item -Path $pfadBackupNOW -Name $gameconfigFolder -ItemType "directory"
-New-Item -Path $pfadBackupNOW -Name $savegameFolder -ItemType "directory"
+New-Item -Path $pfadBackupGame -Name $backuptime -ItemType "directory" | Out-Null
+New-Item -Path $pfadBackupNOW -Name $gameconfigFolder -ItemType "directory" | Out-Null
+New-Item -Path $pfadBackupNOW -Name $savegameFolder -ItemType "directory" | Out-Null
 
 headlinekspdmp
-Write-Host "   ...done! Copy files...`n"
+Write-Host "`n   ...done! Copy files...`n"
 waittimer
 
 Copy-Item -Path $gameconfigDIR -Recurse -Destination $backupConfigDIR | Out-Null
 Copy-Item -Path $savegameDIR -Recurse -Destination $backuSavegameDIR | Out-Null
 
 headlinekspdmp
-Write-Host "   ...Backups done! `n   Starting server updates... `n"
+Write-Host "`n   ...Backups done! `n"
 waittimer
 
 # Updates
-
-Start-Process -FilePath $updateEXE -WindowStyle Hidden
-$updateprocess = get-process | Where-Object path -eq $updateEXE -ErrorAction SilentlyContinue
-Wait-Process -Id $updateprocess.Id
+headlinekspdmp
+$stringupdate
+Start-Process -FilePath $updateEXE
+Start-Sleep -Seconds $updatetime
+Stop-Process -Name "*DMPUpdater*"
 
 headlinekspdmp
-Write-Host "   ...Updates done! `n"
+Write-Host "`n   ...Updates done! `n"
 waittimer
 
 # Start Server
-headlinemuss
-Write-Host "   Starting game server...`n"
+headlinekspdmp
+Write-Host "`n   Starting game server...`n"
 Start-Process -FilePath $gameEXE
 waittimer
 
-headlinemuss
-Write-Host "   Server starts up now! `n   Should be availiable in a few Seconds...`n`n Exit KerbalSpaceProgram-DMP-SM...`n`n`n`n"
+headlinekspdmp
+Write-Host "`n   Server starts up now! `n   Should be availiable in a few Seconds...`n`n Exit KerbalSpaceProgram-DMP-SM...`n`n`n`n"
 waittimer
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-#stop-process -Id $PID                                                                                                  # Close script
+stop-process -Id $PID                                                                                                  # Close script
 
 
