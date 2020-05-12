@@ -64,6 +64,10 @@ $expandpath2 = ("$gameinstanceDIR\$dlfileUpdater")
 $pfadBackup = ("$rootgamesrv\Backup")
 
 
+
+
+
+
 $stringrdfound = [System.String]::Concat("`n   Root directory ok :D `n   ", $rootgamesrv, "`n")
 $stringrdfoundnot = [System.String]::Concat("`n   Root directory not found -,- Create new directory... `n   ", $rootgamesrv, "`n")
 $stringrdcreate = [System.String]::Concat("`n   Root directory created! `n   ", $rootgamesrv, "`n")
@@ -216,8 +220,8 @@ $pfadBackupNOW = ("$pfadBackupGame\$backuptime")
 $backupConfigDIR = ("$pfadBackupNOW\$gameconfigFolder")
 $backuSavegameDIR = ("$pfadBackupNOW\$savegameFolder")
 
-$stringbudirnot = [System.String]::Concat("   Backup directory not fond! `n   Creating: ", $pfadBackup, "`n")
-$stringbackupheute = [System.String]::Concat("   Creating: `n   ", $pfadBackupNOW, "...`n   ", $backupConfigDIR, "...`n   ", $backuSavegameDIR, "`n")
+$stringbudirnot = [System.String]::Concat("`n   Backup directory not fond! `n   Creating: ", $pfadBackup, "`n")
+$stringbackupheute = [System.String]::Concat("`n   Creating: `n   ", $pfadBackupNOW, "...`n   ", $backupConfigDIR, "...`n   ", $backuSavegameDIR, "`n")
 
 # Check Backup Directory
 if(!(Test-Path $pfadBackup))
