@@ -63,11 +63,6 @@ $expandpath1 = ("$gameinstanceDIR\$dlfileServer")
 $expandpath2 = ("$gameinstanceDIR\$dlfileUpdater")
 $pfadBackup = ("$rootgamesrv\Backup")
 
-
-
-
-
-
 $stringrdfound = [System.String]::Concat("`n   Root directory ok :D `n   ", $rootgamesrv, "`n")
 $stringrdfoundnot = [System.String]::Concat("`n   Root directory not found -,- Create new directory... `n   ", $rootgamesrv, "`n")
 $stringrdcreate = [System.String]::Concat("`n   Root directory created! `n   ", $rootgamesrv, "`n")
@@ -116,13 +111,13 @@ headlinekspdmp
 Write-Host "`n   Check root directory...`n"
 waittimer
 
-if(!(Test-Path $rootgamesrv))                                                                                               # If game server root directory is not present...
+if(!(Test-Path $rootgamesrv))                                                                                                                               # If game server root directory is not present...
 {
     headlinekspdmp
     Write-Host $stringrdfoundnot
     waittimer
     
-    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory" | Out-Null                                             # ...create it...
+    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory" | Out-Null                                                                  # ...create it...
     
     headlinekspdmp
     $stringrdcreate
@@ -131,7 +126,7 @@ if(!(Test-Path $rootgamesrv))                                                   
 else
 {
     headlinekspdmp
-    Write-Host $stringrdfound                                                                                               # ...else write game server root directory is present.
+    Write-Host $stringrdfound                                                                                                                               # ...else write game server root directory is present.
     waittimer 
 }
 
@@ -140,47 +135,45 @@ headlinekspdmp
 Write-Host "`n   Check game server directory...`n"
 waittimer
 
-if(!(Test-Path $gameinstanceDIR))                                                                                           # If game server root directory is not present...
+if(!(Test-Path $gameinstanceDIR))                                                                                                                           # If game server instance directory is not present...
 {
     headlinekspdmp
     Write-Host "`n   Game server directory not found! `n   Create directory and download KSP-DMP... `n"
     waittimer
     
-    New-Item -Path $rootgamesrv -Name $gameinstancename -ItemType "directory" | Out-Null                                              # ...create it...
+    New-Item -Path $rootgamesrv -Name $gameinstancename -ItemType "directory" | Out-Null                                                                    # ...create it...
     
     headlinekspdmp
     Write-Host "`n   Directory created! Downloading KSP-DMP... `n"
     waittimer
 
-    Invoke-WebRequest -Uri $dllServer -OutFile $expandpath1
-    Invoke-WebRequest -Uri $dllUpdater -OutFile $expandpath2
-    Get-ChildItem $gameinstanceDIR -Filter *.zip | Expand-Archive -DestinationPath $gameinstanceDIR -Force
+    Invoke-WebRequest -Uri $dllServer -OutFile $expandpath1                                                                                                 # Download server files
+    Invoke-WebRequest -Uri $dllUpdater -OutFile $expandpath2                                                                                                # Download Updater
+    Get-ChildItem $gameinstanceDIR -Filter *.zip | Expand-Archive -DestinationPath $gameinstanceDIR -Force                                                  # Unzip Server files
     
-    Get-ChildItem -Path $gameinstanceDIR\DMPServer -Recurse -File | Move-Item -Destination $gameinstanceDIR
-    Remove-Item $gameinstanceDIR\DMPServer -Recurse
-    Remove-Item -Path $gameinstanceDIR\*.zip
+    Get-ChildItem -Path $gameinstanceDIR\DMPServer -Recurse -File | Move-Item -Destination $gameinstanceDIR                                                 # Move files one directory up to game instance directory
+    Remove-Item $gameinstanceDIR\DMPServer -Recurse                                                                                                         # Remove unused directory
+    Remove-Item -Path $gameinstanceDIR\*.zip                                                                                                                # Remove zip-file
 
     headlinekspdmp
     Write-Host "`n   Downloads complete! First run... `n"
     waittimer
     
-    Start-Process -FilePath $gameEXE -WindowStyle Hidden
+    Start-Process -FilePath $gameEXE -WindowStyle Hidden                                                                                                    # Start server for first run
     $gameprocess = (Get-Process -Name "*DMPServer*").Name
-    Start-Sleep -Seconds 5
-    Stop-Process -Name $gameprocess                                                                                        # ...stopp game server...
-    Wait-Process -Name $gameprocess                                                                                        # ...and wait for stopp.
+    Start-Sleep -Seconds 5                                                                                                                                  # Wait for Server - 5 Seconds
+    Stop-Process -Name $gameprocess                                                                                                                         # ...stopp game server...
+    Wait-Process -Name $gameprocess                                                                                                                         # ...and wait for stopp.
     
 }
 else
 {
     headlinekspdmp
-    Write-Host "`n   Game server directory found! `n   Check status... `n"                                                    # ...else write game server root directory is present.
+    Write-Host "`n   Game server directory found! `n   Check status... `n"                                                                                  # ...else write game server instance directory is present.
     waittimer 
 }
 
-
 #--- Verarbeitung -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
 # Stopp Server
 headlinekspdmp
 Write-Host  "`n   Check for running server... `n"
@@ -188,14 +181,14 @@ waittimer
 
 $gameprocess = (Get-Process -Name "*DMPServer*").Name
 
-if($gameprocess)                                                                                                            # If game server is running...
+if($gameprocess)                                                                                                                                            # If game server is running...
 {
     headlinekspdmp
     Write-Host "`n   Server is currently running.`n   Stopping Server...`n"
     waittimer
     
-    Stop-Process -Name $gameprocess                                                                                        # ...stopp game server...
-    Wait-Process -Name $gameprocess                                                                                        # ...and wait for stopp.
+    Stop-Process -Name $gameprocess                                                                                                                         # ...stopp game server...
+    Wait-Process -Name $gameprocess                                                                                                                         # ...and wait for stopp.
 
     headlinekspdmp
     Write-Host "`n   ...server stopped.`n"
@@ -204,7 +197,8 @@ if($gameprocess)                                                                
 else 
 {
     headlinekspdmp
-    Write-Host "`n   Server is currently not running.`n"                                                                      # ...else say that server is not running.
+    Write-Host "`n   Server is currently not running.`n"                                                                                                    # ...else say that server is not running.
+
     waittimer
    
 }
@@ -224,13 +218,13 @@ $stringbudirnot = [System.String]::Concat("`n   Backup directory not fond! `n   
 $stringbackupheute = [System.String]::Concat("`n   Creating: `n   ", $pfadBackupNOW, "...`n   ", $backupConfigDIR, "...`n   ", $backuSavegameDIR, "`n")
 
 # Check Backup Directory
-if(!(Test-Path $pfadBackup))
+if(!(Test-Path $pfadBackup))                                                                                                                                # If backup main directory is not present...
 {
     headlinekspdmp
     Write-Host $stringbudirnot
     waittimer
     
-    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory" | Out-Null
+    New-Item -Path $rootgamesrvDIR -Name $rootgamesrvPATH -ItemType "directory" | Out-Null                                                                  # ...create it...
     
     headlinekspdmp
     $stringrdcreate
@@ -239,18 +233,18 @@ if(!(Test-Path $pfadBackup))
 else
 {
     headlinekspdmp
-    Write-Host "`n   Backup directory found...`n"
+    Write-Host "`n   Backup directory found...`n"                                                                                                           # ...else say that directory is present
     waittimer 
 }
 
 # Check Backup Game Directory
-if(!(Test-Path $pfadBackupGame))
+if(!(Test-Path $pfadBackupGame))                                                                                                                            # If backup game-instance directory is not present...
 {
     headlinekspdmp
     Write-Host "`n   Backup gameinstance directory not found! Creating..."
     waittimer
     
-    New-Item -Path $pfadBackup -Name $gameinstancename -ItemType "directory" | Out-Null
+    New-Item -Path $pfadBackup -Name $gameinstancename -ItemType "directory" | Out-Null                                                                     # ...create it...
     
     headlinekspdmp
     Write-Host "`n   Backup gameinstance directory created!`n"
@@ -259,24 +253,27 @@ if(!(Test-Path $pfadBackupGame))
 else
 {
     headlinekspdmp
-    Write-Host "`n   Backup gameinstance directory found :D`n"
+    Write-Host "`n   Backup gameinstance directory found :D`n"                                                                                              # ...else say that directory ist present.
     waittimer 
 }
 
+# Create dayli directory
 headlinekspdmp
 Write-Host $stringbackupheute
 waittimer
 
-New-Item -Path $pfadBackupGame -Name $backuptime -ItemType "directory" | Out-Null
-New-Item -Path $pfadBackupNOW -Name $gameconfigFolder -ItemType "directory" | Out-Null
-New-Item -Path $pfadBackupNOW -Name $savegameFolder -ItemType "directory" | Out-Null
+# Create dayli directories
+New-Item -Path $pfadBackupGame -Name $backuptime -ItemType "directory" | Out-Null                                                                           # Create dayli gameinstance backup directory
+New-Item -Path $pfadBackupNOW -Name $gameconfigFolder -ItemType "directory" | Out-Null                                                                      # Create config subdirectory
+New-Item -Path $pfadBackupNOW -Name $savegameFolder -ItemType "directory" | Out-Null                                                                        # Create savegame subdirectory
 
 headlinekspdmp
 Write-Host "`n   ...done! Copy files...`n"
 waittimer
 
-Copy-Item -Path $gameconfigDIR -Recurse -Destination $backupConfigDIR | Out-Null
-Copy-Item -Path $savegameDIR -Recurse -Destination $backuSavegameDIR | Out-Null
+# Copy files to backup location
+Copy-Item -Path $gameconfigDIR -Recurse -Destination $backupConfigDIR | Out-Null                                                                            # Copy config files to config backup directory
+Copy-Item -Path $savegameDIR -Recurse -Destination $backuSavegameDIR | Out-Null                                                                             # Copy savegame files to config backup directory
 
 headlinekspdmp
 Write-Host "`n   ...Backups done! `n"
@@ -285,12 +282,24 @@ waittimer
 # Updates
 headlinekspdmp
 $stringupdate
-Start-Process -FilePath $updateEXE
-Start-Sleep -Seconds $updatetime
-Stop-Process -Name "*DMPUpdater*"
+Start-Process -FilePath $updateEXE                                                                                                                          # Start update-process
+Start-Sleep -Seconds $updatetime                                                                                                                            # Wait for update-process
+Stop-Process -Name "*DMPUpdater*"                                                                                                                           # Stop update-process
 
 headlinekspdmp
 Write-Host "`n   ...Updates done! `n"
+waittimer
+
+headlinekspdmp
+Write-Host "`n   Rewrite config `n"
+waittimer
+
+# Restore config from backup
+$rewriteconf = Get-ChildItem -Path $pfadBackupGame -Directory | Sort-Object LastAccessTime -Descending | Select-Object -First 1 -ExpandProperty name        # Find second youngest directory...
+Copy-Item -Path $pfadBackupGame\$rewriteconf -Destination $gameconfigDIR -Recurse                                                                           # ...copy config backup from it to config directory.
+
+headlinekspdmp
+Write-Host "`n   Rewrite done `n"
 waittimer
 
 # Start Server
@@ -305,6 +314,6 @@ waittimer
 
 #------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-stop-process -Id $PID                                                                                                  # Close script
+stop-process -Id $PID                                                                                                                                       # Close script
 
 
