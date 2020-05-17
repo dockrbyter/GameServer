@@ -6,23 +6,26 @@ KerbalSpaceProgram-DMP-SM.ps1
 
     A script to setup and maintin a Kerbal Spaceprogram Server,
     based on the great DarkMultiplayer.
-
     Checkout their website: https://d-mp.org
 
 
-    Edit the values in lines 30 to 38 corresponding to your environment
+    Edit the values in lines 34 to 41 corresponding to your environment
+    (Or just run the script if you are fine with the defaults... ;)
 
-    For server setup / launch - just run the script
+    ->  For server setup / launch - just run the script
+        -   The Script will ALLWAYS generate a backup from the config files 
+            and overwrite them after server update from the last backup
+        -   The Script will ALLWAYS generate a backup from the savegame files
+        -   If you want to disable the config rewrite just set a # before line 305
 
-    For server management create new scheduled task
-        - Select User: EX LocalComputer\Users
-        - New Trigger: EX At startup, oder at time
-        - Aktion: Start Programm
-            * Powershell.exe
-            * Arguments: -command .\KerbalSpaceProgram-DMP-SM.ps1
-            * Start in: Script directory EX C:\GameServer
-        - Start only if network is available
-
+    ->  For server management create a new scheduled task:
+            -   Select User: EX LocalComputer\Users
+            -   New Trigger: EX At startup, oder at time
+            -   Aktion: Start Programm
+                    *   Powershell.exe
+                    *   Arguments: -command .\KerbalSpaceProgram-DMP-SM.ps1
+                    *   Start in: Script directory EX C:\GameServer
+            -   Start only if network is available
 
 https://github.com/thelamescriptkiddiemax/GameServer
 #>
@@ -296,7 +299,10 @@ waittimer
 
 # Restore config from backup
 $rewriteconf = Get-ChildItem -Path $pfadBackupGame -Directory | Sort-Object LastAccessTime -Descending | Select-Object -First 1 -ExpandProperty name        # Find second youngest directory...
-Copy-Item -Path $pfadBackupGame\$rewriteconf -Destination $gameconfigDIR -Recurse                                                                           # ...copy config backup from it to config directory.
+$rewriteCtB = ("$pfadBackupGame\$rewriteconf")
+$gameconfigDIRdest = $gameconfigDIR.replace("*","")
+
+Copy-Item -Path $rewriteCtB -Destination $gameconfigDIRdest -Recurse                                                                           # ...copy config backup from it to config directory.
 
 headlinekspdmp
 Write-Host "`n   Rewrite done `n"
