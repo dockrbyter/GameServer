@@ -1,0 +1,15 @@
+Konfig-Vorlagen für ARK: Survival Evolved
+
+Auf einem Linux-Server:
+Serverupdate:
+cd ark
+./steamcmd.sh +login anonymous +force_install_dir server1/server +app_update 376030 validate +quit
+
+Serverstart:
+	- cd ark/server1/server/ShooterGame/Binaries/Linux
+	- screen -S ARKIsland
+	- ./startserver.sh
+	- Strg a d
+
+
+In Startscript ANPASSEN eben anpassen ;) ;)
