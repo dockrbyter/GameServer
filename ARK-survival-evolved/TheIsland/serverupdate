@@ -1,0 +1,1 @@
+./steamcmd.sh +login anonymous +force_install_dir server1/server +app_update 376030 validate +quit
