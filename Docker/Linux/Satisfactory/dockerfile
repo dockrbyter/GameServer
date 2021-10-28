@@ -16,13 +16,18 @@ LABEL "other"="https://github.com/thelamescriptkiddiemax"
 # RUNs
 RUN steamcmd +login anonymous +force_install_dir /home/steam/server +app_update 1690800 +quit
 
+# Copy
+COPY startfactory.sh /home/steam/startfactory.sh
+
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+WORKDIR "/home/steam" 
+
 # Volume
-VOLUME [ "/home/steam/server" ]
+VOLUME [ "/server" ]
 
 # Expose Ports: 
-EXPOSE 15777 15000 7777
+EXPOSE 15777/udp 15000/udp 7777/udp
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
