@@ -1,4 +1,5 @@
 # Satisfactory Dedicated Server
+#
 # https://github.com/thelamescriptkiddiemax/
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 # SteamCMD Base Image
@@ -18,13 +19,13 @@ RUN steamcmd +login anonymous +force_install_dir /home/steam/server +app_update 
 RUN chown -R "steam:steam" "/home/steam/server"
 
 # Copy
-COPY startfactory.sh /home/steam/Engine.ini
 COPY startfactory.sh /home/steam/startfactory.sh
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Volume
 VOLUME "/home/steam/server"
+VOLUME "/home/steam/.config"
 
 # Expose Ports: 
 EXPOSE 15777/udp 15000/udp 7777/udp
