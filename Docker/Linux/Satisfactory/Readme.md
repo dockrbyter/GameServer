@@ -1,7 +1,7 @@
 # Satisfactory Dedicated Server
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
 
-![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsatisfactory.fandom.com%2Fwiki%2FSatisfactory&psig=AOvVaw22Aswbl-QG1QbrsHLDEFTg&ust=1635710436944000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDLjJD28vMCFQAAAAAdAAAAABAD)
+![alt text](https://img2.storyblok.com/fit-in/0x300/filters:format(png)/f/110098/5405x1416/10decfbcac/hero-logo.png)
 
 ## How To
 ### Firewall Ports
