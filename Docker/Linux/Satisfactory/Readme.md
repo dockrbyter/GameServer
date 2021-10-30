@@ -6,7 +6,7 @@
 
 ## How To
 
-#### Firewall Ports
+##### Open Firewall Ports:
  - 15777/UDP
  - 7777/UDP
  - 15000/UDP
