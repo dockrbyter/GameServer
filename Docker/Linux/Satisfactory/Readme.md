@@ -1,13 +1,13 @@
 # Satisfactory Dedicated Server
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
-
+![alt text](https://www.google.com/url?sa=i&url=https%3A%2F%2Fsatisfactory.fandom.com%2Fwiki%2FSatisfactory&psig=AOvVaw22Aswbl-QG1QbrsHLDEFTg&ust=1635710436944000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCJDLjJD28vMCFQAAAAAdAAAAABAD)
 ## How To
 ### Firewall Ports
  - 15777/UDP
  - 7777/UDP
  - 15000/UDP
  
-### Create Date Location
+### Create Data Location
  - mkdir mkdir -p $HOME/satisfactory/conf
  
  ### Run Container
