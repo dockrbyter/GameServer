@@ -1,6 +1,5 @@
 # Satisfactory Dedicated Server
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
-
 [![Image Size](https://img.shields.io/docker/image-size/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
 
 ![alt text](https://img2.storyblok.com/fit-in/0x300/filters:format(png)/f/110098/5405x1416/10decfbcac/hero-logo.png)
