@@ -10,7 +10,7 @@
  - 15000/UDP
  
 #### Create Data Location
- - mkdir mkdir -p $HOME/satisfactory/conf
+ - mkdir -p $HOME/satisfactory/conf
 
 #### Run Container
   - docker run --name satisfactory -it --rm -p 15777:15777/udp -p 15000:15000/udp -p 7777:7777/udp -v $HOME/satisfactory:/home/steam/server -v $HOME/satisfactory/conf:/home/steam/.config dockrbyter/satisfactory
