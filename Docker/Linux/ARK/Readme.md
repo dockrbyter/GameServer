@@ -51,3 +51,4 @@ docker run --name ark2 -it --rm -p 27021:27020/tcp -p 27016:27015/udp -p 7780:77
 ##### Links
  - https://ark.fandom.com/wiki/Dedicated_server_setup
  - https://hub.docker.com/r/dockrbyter/arksurvivalevolved
+ - https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Linux/ARK
