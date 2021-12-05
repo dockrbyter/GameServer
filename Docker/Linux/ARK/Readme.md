@@ -20,14 +20,14 @@ mkdir -p $HOME/ark/srv1
 ```
 docker run --name ark1 -it --rm -p 27020:27020/tcp -p 27015:27015/udp -p 7778:7778/udp -p 7777:7777/udp -v $HOME/ark/srv1:/home/steam/server -v $HOME/ark/cluster:/home/steam/arkcluster -e SERVERNAME=<SUPERCOOLSRVNAME> -e SERVERPW=<SUPERSTRONGPW> -e ADMINPW=<SUPERSTRONADMINGPW> -e CLUSTERID=<UNIQUECLUSTERID> dockrbyter/arksurvivalevolved
 
-(Edit everthin in <> (and remove <>))
+(Edit everything in <> (and remove <>))
  ```
 
 #### Run Container (Valguero as second instance)
 ```
 docker run --name ark2 -it --rm -p 27021:27020/tcp -p 27016:27015/udp -p 7780:7778/udp -p 7779:7777/udp -v $HOME/ark/srv2:/home/steam/server -v $HOME/ark/cluster:/home/steam/arkcluster -e SERVERNAME=<SUPERCOOLSRVNAME> -e SERVERPW=<SUPERSTRONGPW> -e ADMINPW=<SUPERSTRONADMINGPW> -e CLUSTERID=<UNIQUECLUSTERID> -e MAP=Valguero_P dockrbyter/arksurvivalevolved
 
-(Edit everthin in <> (and remove <>), don't forget to create another save game location (mkdir -p $HOME/ark/srv2) and add the port forwardings to your firewall)
+(Edit everything in <> (and remove <>), don't forget to create another save game location (mkdir -p $HOME/ark/srv2) and add the port forwardings to your firewall)
  ```
 
 ### Environment Variables (and their defaults)
