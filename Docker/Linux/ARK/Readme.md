@@ -32,14 +32,14 @@ docker run --name ark2 -it --rm -p 27021:27020/tcp -p 27016:27015/udp -p 7780:77
 
 ### Environment Variables (and their defaults)
  - GAMEID=376030
- - SERVERNAME=maximiliannetwork
+ - SERVERNAME=dockrbyter
  - MAP=TheIsland
  - MAXPLAYERS=16
  - SERVERPW=welovemax
  - ADMINPW=welovemax
  - MULTIHOMEIP=0.0.0.0
  - CLUSTERDIR=/home/steam/arkcluster
- - CLUSTERID=maximiliannetwork
+ - CLUSTERID=dockrbyter
 
 ### Locations
  - Server Files: ~/ark/srv1

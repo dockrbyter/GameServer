@@ -13,14 +13,14 @@ LABEL "other"="https://github.com/thelamescriptkiddiemax"
 
 # Environment Variables
 ENV GAMEID=376030 \
-    SERVERNAME=maximiliannetwork \
+    SERVERNAME=dockrbyter \
     MAP=TheIsland \
     MAXPLAYERS=16 \
     SERVERPW=welovemax \
     ADMINPW=welovemax \
     MULTIHOMEIP=0.0.0.0 \
     CLUSTERDIR=/home/steam/arkcluster \
-    CLUSTERID=maximiliannetwork
+    CLUSTERID=dockrbyter
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Working Directory
