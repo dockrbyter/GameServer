@@ -2,8 +2,6 @@
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
 [![Image Size](https://img.shields.io/docker/image-size/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
 
-![alt text](https://img2.storyblok.com/fit-in/0x300/filters:format(png)/f/110098/5405x1416/10decfbcac/hero-logo.png)
-
 ## How To
 
 ##### Open Firewall Ports:
@@ -31,3 +29,4 @@ docker run --name satisfactory -it --rm -p 15777:15777/udp -p 15000:15000/udp -p
 ##### Links
  - https://satisfactory.fandom.com/wiki/Dedicated_servers
  - https://hub.docker.com/r/dockrbyter/satisfactory
+ - https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Linux/Satisfactory
