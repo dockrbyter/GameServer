@@ -1,0 +1,48 @@
+# ARK: Survival Evolved Dedicated Server
+#
+# https://github.com/thelamescriptkiddiemax/
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# SteamCMD Base Image
+FROM dockrbyter/steamcmd
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Label
+LABEL image.authors="Max"
+LABEL description="ARK Survival Evolved Dedicated Server"
+LABEL "other"="https://github.com/thelamescriptkiddiemax"
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Environment Variables
+ENV GAMEID=376030 \
+    SERVERNAME=maximiliannetwork \
+    MAP=TheIsland \
+    MAXPLAYERS=16 \
+    SERVERPW=welovemax \
+    ADMINPW=welovemax \
+    MULTIHOMEIP=0.0.0.0 \
+    CLUSTERDIR=/home/steam/arkcluster \
+    CLUSTERID=maximiliannetwork
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Working Directory
+WORKDIR "/home/steam"
+
+# RUNs
+RUN mkdir -p $CLUSTERDIR
+RUN mkdir -p "/home/steam/server/ShooterGame/Saved/Config/LinuxServer"
+
+# Copy
+COPY startark.sh /home/steam/startark.sh
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Volume
+VOLUME /home/steam/server
+VOLUME $CLUSTERDIR
+
+# Expose Ports: 
+EXPOSE 7777/udp 7778/udp 27015/udp 27020/tcp
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Start Ark Server
+CMD [ "./startark.sh" ]
