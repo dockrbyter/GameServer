@@ -11,10 +11,13 @@ LABEL description="ARK Survival Evolved Dedicated Server"
 LABEL "other"="https://github.com/thelamescriptkiddiemax"
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Build Arguments
+ARG DIRDATA=/home/steam/arkdata
+
 # Environment Variables
 ENV GAMEID=376030 \
-    DIRSAVE=/home/steam/arkdata/savegames \
-    DIRCLUSTER=/home/steam/arkdata/cluster \
+    DIRSAVE=${DIRDATA}/savegames/$SERVERNAME \
+    DIRCLUSTER=${DIRDATA}/cluster \
     SERVERNAME=dockrbyter \
     MAP=TheIsland \
     MAXPLAYERS=16 \
@@ -30,8 +33,8 @@ ENV GAMEID=376030 \
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Create Directories
-RUN mkdir -p /home/steam/arkdata/cluster
+# RUNs
+RUN mkdir -p $DIRCLUSTER
 
 # Copy Start Script
 COPY startark.sh /home/steam/startark.sh
@@ -40,8 +43,7 @@ COPY startark.sh /home/steam/startark.sh
 
 # Persistent Data
 VOLUME /home/steam/server
-VOLUME /home/steam/arkdata
-VOLUME /.steam
+VOLUME ${DIRDATA}
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -51,4 +53,4 @@ EXPOSE $PORTGAME/udp $PORTRAW/udp $PORTQUERY/udp $PORTRCON/tcp
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Start Ark Server
-CMD [ "/home/steam/startark.sh" ]
+CMD [ "./startark.sh" ]
