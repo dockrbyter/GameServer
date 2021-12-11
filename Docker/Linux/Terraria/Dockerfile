@@ -1,52 +1,40 @@
-# ARK: Survival Evolved Dedicated Server
+# Terraria 
 #
 # https://github.com/thelamescriptkiddiemax/
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
-# SteamCMD Base Image
-FROM dockrbyter/steamcmd
+# Base Image 
+FROM ubuntu:21.04
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Label
 LABEL image.authors="Max"
-LABEL description="ARK Survival Evolved Dedicated Server"
+LABEL description="Terraria Dedicated Server"
 LABEL "other"="https://github.com/thelamescriptkiddiemax"
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Environment Variables
-ENV GAMEID=376030 \
-    SERVERNAME=dockrbyter \
-    DIRCLUSTER=/home/steam/arkdata \
-    MAP=TheIsland \
-    MAXPLAYERS=16 \
-    ADMINPW=welovemax \
-    CLUSTERID=dockrbyter \
-    MULTIHOMEIP=0.0.0.0 \
-    PORTGAME=7777 \
-    PORTRAW=7778 \
-    PORTQUERY=27015 \
-    PORTRCON=27020 \
-    RCONON=True
+ENV PORTGAME=7777
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
-# Create Directories
-RUN mkdir -p /home/steam/arkdata
-
-# Copy Start Script
-COPY startark.sh /home/steam/startark.sh
+# Download Server Files
+RUN mkdir -p /home/terraria/download \
+    apt-get update && \
+    apt-get install -y curl zip && \
+    curl -sL https://www.terraria.org/api/download/pc-dedicated-server/terraria-server-1432.zip --output /home/terraria/download/server.zip && \
+    unzip -q /home/terraria/download/server.zip -d /home/terraria/download \
+    mv /home/terraria/download/1432/Linux/* /home/terraria
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Persistent Data
-VOLUME /home/steam/server
-VOLUME /home/steam/arkdata
-VOLUME /.steam
+VOLUME /home/terraria
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Expose Ports
-EXPOSE $PORTGAME/udp $PORTRAW/udp $PORTQUERY/udp $PORTRCON/tcp 
+EXPOSE $PORTGAME/tcp
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Start Ark Server
-CMD [ "/home/steam/startark.sh" ]
+CMD [ "/home/steam/start.sh" ]
