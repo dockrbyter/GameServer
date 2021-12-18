@@ -48,3 +48,4 @@ EXPOSE $PORTGAME/tcp
 
 # Start Terraria Server
 #CMD ["sh", "/terraria/data/start.sh" ]
+
