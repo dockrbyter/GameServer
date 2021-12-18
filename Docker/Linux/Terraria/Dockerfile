@@ -18,20 +18,20 @@ ENV PORTGAME=7777
 
 # Download Server Files
 RUN mkdir -p /terraria/setup \
-    mkdir -p /terraria/
+    mkdir -p /terraria/data
 
 ADD https://www.terraria.org/api/download/pc-dedicated-server/terraria-server-1432.zip /terraria/setup/
-ADD . /terraria/
-
-RUN apk update \
-    apk upgrade \
-    apk search zip \
-    apk add zip
+ADD . /terraria/data
 
 WORKDIR /terraria/setup
 
-RUN unzip *.zip -d /terraria/setup \
-    mv -v /terraria/setup/1432/Linux/* /terraria
+RUN apk update && \
+    apk upgrade && \
+    apk search zip && \
+    apk add zip && \
+    unzip *.zip -d /terraria/setup && \
+    mv -v /terraria/setup/1432/Linux/* /terraria && \
+    chmod +x /terraria/data/start.sh
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -47,4 +47,4 @@ EXPOSE $PORTGAME/tcp
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Start Terraria Server
-#CMD [ "terraria/start.sh" ]
+#CMD ["sh", "/terraria/data/start.sh" ]
