@@ -8,20 +8,14 @@
 
 #### Create Data Location
 ```
-mkdir -p $HOME/kspdmp
+mkdir -p $HOME/kspdmp/config
+mkdir -p $HOME/kspdmp/universe
  ```
 
 #### Run Container
 ```
-docker run --name kspdmp -it --rm -e PORTGAME=6702 -p 6702:6702/tcp -v $HOME/kspdmp:/ksp dockrbyter/kspdmp
+docker run --name kspdmp -it --rm -e PORTGAME=6702 -p 6702:6702/tcp -v $HOME/kspdmp/config:/ksp/Config -v $HOME/kspdmp/universe:/ksp/Universe dockrbyter/kspdmp
  ```
-
-#### Server Update
- - Stop Container
- - Connect from a Windows client like WinSCP or something else to Docker Host
- - Navigate to the KSP-DMP directory
- - Run DMPUpdater.exe
- - Restart Container
 
 ## Infos
 
@@ -29,9 +23,8 @@ docker run --name kspdmp -it --rm -e PORTGAME=6702 -p 6702:6702/tcp -v $HOME/ksp
  - PORTGAME=6702
 
 ### Locations
- - Server Files: /ksp
- - Save Game Files: /ksp/Universe
- - Config Files: /ksp/Config
+ - Save Game Files: /ksp/universe
+ - Config Files: /ksp/config
 
 ##### Links
  - https://d-mp.org/
