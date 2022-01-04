@@ -19,6 +19,7 @@ ENV PORTGAME=6702
 # Download Server Files
 RUN mkdir -p /ksp/setup
 ADD https://d-mp.org/builds/release/v0.3.8.0/DMPServer.zip /ksp/setup/
+ADD https://d-mp.org/builds/updater/DMPUpdater.exe /ksp/
 
 # Setup Server
 WORKDIR /ksp/setup
