@@ -1,0 +1,50 @@
+# Kerbal Space Program LMP Dedicated Server
+#
+# https://github.com/thelamescriptkiddiemax/
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Base Image 
+FROM mono
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Label
+LABEL image.authors="Max"
+LABEL description="KSP LMP Dedicated Server"
+LABEL "other"="https://github.com/thelamescriptkiddiemax"
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Environment Variables
+ENV PORTGAME=8800
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Download Server Files
+RUN mkdir -p /ksp/setup
+ADD https://github.com/LunaMultiplayer/LunaMultiplayer/releases/download/0.28.0/LunaMultiplayer-Server-Release.zip /ksp/setup/
+
+# Setup Server
+WORKDIR /ksp/setup
+RUN apt update -y && \
+    apt upgrade -y && \
+    apt install -y zip apt-transport-https && \
+    apt update -y && \
+    apt install -y aspnetcore-runtime-6.0 && \
+    unzip *.zip -d /ksp/setup && \
+    mv -v /ksp/setup/LMPServer/* /ksp
+
+WORKDIR /ksp    
+RUN rm -r setup/ && \
+    chmod +x Server.exe
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Persistent Data
+VOLUME /ksp
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Expose Ports
+EXPOSE $PORTGAME/udp
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Start Server
+#CMD ["mono", "./Server.exe" ]
