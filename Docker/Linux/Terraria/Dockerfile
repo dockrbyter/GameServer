@@ -3,7 +3,7 @@
 # https://github.com/thelamescriptkiddiemax/
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Base Image 
-FROM alpine
+FROM ubuntu
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Label
 LABEL image.authors="Max"
@@ -18,22 +18,24 @@ ENV PORTGAME=7777
 
 # Download Server Files
 RUN mkdir -p /terraria/setup \
-    mkdir -p /terraria/data
+    mkdir -p /terraria
 
 ADD https://www.terraria.org/api/download/pc-dedicated-server/terraria-server-1432.zip /terraria/setup/
-ADD . /terraria
-RUN chmod +x /terraria/start.sh
 
 WORKDIR /terraria/setup
 
-RUN apk update && \
-    apk upgrade && \
-    apk search bash && \
-    apk add bash && \
-    apk search zip && \
-    apk add zip && \
+RUN apt update -y && \
+    apt upgrade -y && \
+    apt install zip -y && \
     unzip *.zip -d /terraria/setup && \
     mv -v /terraria/setup/1432/Linux/* /terraria
+
+ADD . /terraria
+
+WORKDIR /terraria
+
+RUN chmod +x TerrariaServer.bin.x86* && \
+    chmod +x start.sh
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -49,5 +51,4 @@ EXPOSE $PORTGAME/tcp
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Start Terraria Server
-WORKDIR /terraria
-#CMD ["sh", "/start.sh" ]
+CMD [ "bash", "./start.sh" ]
