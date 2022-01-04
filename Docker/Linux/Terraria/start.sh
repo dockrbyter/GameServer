@@ -1,3 +1,2 @@
-#!/bin/sh
-
-./terraria/TerrariaServer.bin.x86_64 -config /terraria/data/serverconfig.txt
+#!/bin/bash
+/terraria/TerrariaServer.bin.x86_64 -config /terraria/serverconfig.txt

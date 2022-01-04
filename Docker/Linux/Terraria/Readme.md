@@ -1,6 +1,4 @@
 # Terraria Dedicated Server
-[![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/arksurvivalevolved.svg)](https://hub.docker.com/r/dockrbyter/arksurvivalevolved)
-[![Image Size](https://img.shields.io/docker/image-size/dockrbyter/arksurvivalevolved.svg)](https://hub.docker.com/r/dockrbyter/arksurvivalevolved)
 
 ## How To
 
