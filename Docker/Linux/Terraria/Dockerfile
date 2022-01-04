@@ -17,8 +17,7 @@ ENV PORTGAME=7777
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Download Server Files
-RUN mkdir -p /terraria/setup \
-    mkdir -p /terraria
+RUN mkdir -p /terraria/setup
 
 ADD https://www.terraria.org/api/download/pc-dedicated-server/terraria-server-1432.zip /terraria/setup/
 
