@@ -34,13 +34,6 @@ docker run --name terraria -it --rm -e PORTGAME=27300 -p 27300:27300/tcp -v $HOM
  - Config File: ~/terraria
  - Save Games: ~/terraria/world
 
-### Settings
-```
-Run container, stop container.
-Navigate to your data location ($HOME/terraria) and edit "serverconfig.cfg".
-Start container.
- ```
-
 ##### Links
  - https://terraria.fandom.com/wiki/Guide:Setting_up_a_Terraria_server
  - https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Linux/Terraria
