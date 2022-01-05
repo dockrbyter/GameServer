@@ -22,7 +22,7 @@ $HOME/terraria
 
 #### Run Container
 ```
-docker run --name terraria -it --rm -e PORTGAME=27300 -p 27300:27300/tcp -v $HOME/terraria:/terraria -v $HOME/terraria/world:/.local/share/Terraria/Worlds dockrbyter/terraria
+docker run --name terraria -it --rm -e PORTGAME=27300 -p 27300:27300/tcp -v $HOME/terraria/terrariaserverconfig.txt:/terraria/terrariaserverconfig.txt -v $HOME/terraria/world:/.local/share/Terraria/Worlds dockrbyter/terraria
  ```
 
 ## Infos
