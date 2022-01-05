@@ -46,7 +46,7 @@ difficulty=0
 maxplayers=10
 
 # Set the port number
-port=7777
+port=27300
 
 # Set the server password
 password=p@55w0rd
