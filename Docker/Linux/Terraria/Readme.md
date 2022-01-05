@@ -11,6 +11,15 @@
 mkdir -p $HOME/terraria/world
  ```
 
+#### Config File
+
+[Download config file](https://gist.github.com/thelamescriptkiddiemax/914ba5b4e3a9d085dacb8ff4dbe85e4b)
+
+```
+Edit the config file, then copy it on the docker host to:
+$HOME/terraria
+ ```
+
 #### Run Container
 ```
 docker run --name terraria -it --rm -e PORTGAME=27300 -p 27300:27300/tcp -v $HOME/terraria:/terraria -v $HOME/terraria/world:/.local/share/Terraria/Worlds dockrbyter/terraria
@@ -22,8 +31,8 @@ docker run --name terraria -it --rm -e PORTGAME=27300 -p 27300:27300/tcp -v $HOM
  - PORTGAME=27300
 
 ### Locations
- - Server Files: ~/terraria
- - Save Games: ~/terraria/savegames
+ - Config File: ~/terraria
+ - Save Games: ~/terraria/world
 
 ### Settings
 ```
@@ -36,3 +45,4 @@ Start container.
  - https://terraria.fandom.com/wiki/Guide:Setting_up_a_Terraria_server
  - https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Linux/Terraria
  - https://hub.docker.com/repository/docker/dockrbyter/terraria
+ - https://gist.github.com/thelamescriptkiddiemax/914ba5b4e3a9d085dacb8ff4dbe85e4b
