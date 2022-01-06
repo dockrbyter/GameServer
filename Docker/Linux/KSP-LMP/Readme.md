@@ -39,4 +39,5 @@ docker run --name ksplmp -it --rm -e PORTGAME=8800 -p 8800:8800/udp -v $HOME/ksp
  - https://github.com/LunaMultiplayer/LunaMultiplayer/wiki/Create-a-server
  - https://github.com/LunaMultiplayer/LunaMultiplayer/wiki/Mod-file
  - https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Linux/KSP-DMP
+ - https://gist.github.com/thelamescriptkiddiemax/cb350ba360308b7488f3521fe18ca339
  - https://hub.docker.com/r/dockrbyter/ksplmp
