@@ -1,6 +1,6 @@
 # Kerbal Space Program LMP Dedicated Server
-[![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/kspdmp.svg)](https://hub.docker.com/r/dockrbyter/kspdmp)
-[![Image Size](https://img.shields.io/docker/image-size/dockrbyter/kspdmp.svg)](https://hub.docker.com/r/dockrbyter/kspdmp)
+[![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/ksplmp.svg)](https://hub.docker.com/r/dockrbyter/ksplmp)
+[![Image Size](https://img.shields.io/docker/image-size/dockrbyter/ksplmp.svg)](https://hub.docker.com/r/dockrbyter/ksplmp)
 ## How To
 
 ##### Open Firewall Ports:
@@ -8,20 +8,22 @@
 
 #### Create Data Location
 ```
-mkdir -p $HOME/ksplmp
+mkdir -p $HOME/ksplmp/universe
+ ```
+
+#### Mod Config File
+
+[Download config file](https://gist.github.com/thelamescriptkiddiemax/cb350ba360308b7488f3521fe18ca339) or create your own.
+
+```
+Edit the mod config file, then copy it on the docker host to:
+$HOME/ksplmp
  ```
 
 #### Run Container
 ```
-docker run --name ksplmp -it --rm -e PORTGAME=6702 -p 6702:6702/tcp -v $HOME/ksplmp:/ksp dockrbyter/ksplmp
+docker run --name ksplmp -it --rm -e PORTGAME=8800 -p 8800:8800/udp -v $HOME/ksplmp:/ksp/Config -v $HOME/ksplmp/universe:/ksp/Universe -v $HOME/ksplmp/LMPModControl.xml:/ksplmp/LMPModControl.xml dockrbyter/ksplmp
  ```
-
-#### Server Update
- - Stop Container
- - Connect from a Windows client like WinSCP or something else to Docker Host
- - Navigate to the KSP-DMP directory
- - Run DMPUpdater.exe
- - Restart Container
 
 ## Infos
 
@@ -35,5 +37,6 @@ docker run --name ksplmp -it --rm -e PORTGAME=6702 -p 6702:6702/tcp -v $HOME/ksp
 
 ##### Links
  - https://github.com/LunaMultiplayer/LunaMultiplayer/wiki/Create-a-server
+ - https://github.com/LunaMultiplayer/LunaMultiplayer/wiki/Mod-file
  - https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Linux/KSP-DMP
- - https://hub.docker.com/r/dockrbyter/kspdmp
+ - https://hub.docker.com/r/dockrbyter/ksplmp

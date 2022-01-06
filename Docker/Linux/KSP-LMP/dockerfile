@@ -3,7 +3,7 @@
 # https://github.com/thelamescriptkiddiemax/
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Base Image 
-FROM mono
+FROM mcr.microsoft.com/dotnet/runtime:5.0-focal
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 # Label
 LABEL image.authors="Max"
@@ -24,20 +24,19 @@ ADD https://github.com/LunaMultiplayer/LunaMultiplayer/releases/download/0.28.0/
 WORKDIR /ksp/setup
 RUN apt update -y && \
     apt upgrade -y && \
-    apt install -y zip apt-transport-https && \
-    apt update -y && \
-    apt install -y aspnetcore-runtime-6.0 && \
+    apt install -y zip && \
     unzip *.zip -d /ksp/setup && \
     mv -v /ksp/setup/LMPServer/* /ksp
 
-WORKDIR /ksp    
+WORKDIR /ksp
 RUN rm -r setup/ && \
     chmod +x Server.exe
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Persistent Data
-VOLUME /ksp
+VOLUME /ksp/Universe
+VOLUME /ksp/Config
 
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -47,4 +46,4 @@ EXPOSE $PORTGAME/udp
 #-----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # Start Server
-#CMD ["mono", "./Server.exe" ]
+CMD ["dotnet", "Server.dll" ]
