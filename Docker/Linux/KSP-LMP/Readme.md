@@ -31,7 +31,7 @@ docker run --name ksplmp -it --rm -e PORTGAME=8800 -p 8800:8800/udp -v $HOME/ksp
  - PORTGAME=8800
 
 ### Locations
- - Server Files: /ksplmp
+ - Mod Config File: /ksplmp
  - Save Game Files: /ksp/Universe
  - Config Files: /ksp/Config
 
