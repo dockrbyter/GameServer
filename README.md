@@ -1,4 +1,5 @@
 # GameServer
+![Footer](https://github.com/dockrbyter/GameServer/blob/master/mediacontent/doky3.png?raw=true)
 ```
 More gaming and less administration...
 ```
