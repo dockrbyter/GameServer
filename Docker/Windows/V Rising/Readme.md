@@ -10,7 +10,6 @@
  
 #### Create Data Location
 ```
-New-Item -Type Directory C:\docker\vrising
 New-Item -Type Directory C:\docker\vrising\srv
 New-Item -Type Directory C:\docker\vrising\data
  ```
