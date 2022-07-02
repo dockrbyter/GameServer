@@ -1,0 +1,35 @@
+# V Rising Container - Windows Core Server
+# https://github.com/thelamescriptkiddiemax/GameServer/tree/master/Docker/Windows/V%20Rising
+#
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Core Server ltsc2019 / Powershell
+FROM dockrbyter/winsteamcmd
+SHELL ["powershell", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Variables
+ENV SAVEDATA="C:\Users\ContainerAdministrator\AppData\LocalLow\Stunlock Studios\VRisingServer" \
+    SRVBP="C:\vrsing" \
+    SERVERNAME="dockrbyter" \
+    MAXPLAYERS="13" \
+    MAXADMINS="3" \
+    PORTGAME="9876" \
+    PORTQUERY="9877"
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Container Contsruction
+RUN New-Item -Type Directory C:\scripts; \
+    New-Item -Type Directory $ENV:SRVBP
+
+COPY start.ps1 c:/scripts/start.ps1
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# Persistent Data
+VOLUME $SAVEDATA
+VOLUME $SRVBP
+
+# Port Exposing
+EXPOSE $PORTGAME/udp $PORTQUERY/udp
+
+# Start Server
+WORKDIR C:/scripts
+ENTRYPOINT  [ "PowerShell.exe", ".\\start.ps1" ]
