@@ -17,7 +17,7 @@ New-Item -Type Directory C:\docker\vrising\data
  
 #### Run Container
 ```
-docker run --name vrising --rm -it -p 9876:9876 -p 9877:9877 -v c:\docker\vrising\savegame:'c:/users/containeradministrator/appdata/locallow/stunlock studios/vrisingserver/Saves' -v c:\docker\vrising\logs:c:/vrising/logs vrising -env $SERVERNAME='maximiliannetwork' -env $MAXPLAYERS='10' -env $MAXADMINS='1' -env $PORTGAME='9876' -env $PORTQUERY='9877' vrising
+docker run --name vrising --rm -p 9876:9876 -p 9877:9877 -v c:\docker\vrising\srv:'c:/vrsing' -v c:\docker\vrising\data:'c:/users/containeradministrator/appdata/locallow/stunlock studios/vrisingserver/Saves' -e SERVERNAME="dockrbyter" -e MAXADMINS='1' -e MAXPLAYERS='10' -e PORTGAME='9876' -e PORTQUERY='9877' dockrbyter/vrising
  ```
 
 ### Environment Variables (and their defaults)
