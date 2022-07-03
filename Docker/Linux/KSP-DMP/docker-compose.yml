@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  vrising:
+    image: dockrbyter/kspdmp:latest
+    volumes:
+      - $HOME/kspdmp/config:/ksp/Config
+      - $HOME/kspdmp/universe:/ksp/Universe
+    environment:
+      PORTGAME: 6702
+    ports:
+      - "6702:6702/tcp"
+
+#   Docker-Compose File: Kerbal Space Program DMP
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/KSP-DMP
