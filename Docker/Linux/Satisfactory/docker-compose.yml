@@ -1,0 +1,14 @@
+version: "3.9"
+services:
+  vrising:
+    image: dockrbyter/satisfactory:latest
+    volumes:
+      - $HOME/satisfactory:/home/steam/server
+      - $HOME/satisfactory/conf:/home/steam/.config
+    ports:
+      - "15777:15777/udp"
+      - "7777:7777/udp"
+      - "15000:15000/udp"
+
+#   Docker-Compose File: Satisfactory
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/Satisfactory
