@@ -20,11 +20,11 @@ docker run --name vrising --rm -p 9876:9876 -p 9877:9877 -v c:\docker\vrising\sr
  ```
 
 ### Environment Variables (and their defaults)
-SERVERNAME="dockrbyter"
-MAXPLAYERS="13"
-MAXADMINS="3"
-PORTGAME="9876"
-PORTQUERY="9877"
+ - SERVERNAME="dockrbyter"
+ - MAXPLAYERS="13"
+ - MAXADMINS="3"
+ - PORTGAME="9876"
+ - PORTQUERY="9877"
  
 ### Locations
  - Serverfiles: C:\vrising\srv
