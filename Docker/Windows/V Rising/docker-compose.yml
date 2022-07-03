@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  vrising:
+    image: dockrbyter/vrising:latest
+    volumes:
+      - c:\docker\vrising\srv:c:/vrsing
+      - c:\docker\vrising\data:c:/users/containeradministrator/appdata/locallow/stunlock studios/vrisingserver/Saves
+    environment:
+      SERVERNAME: dockrbyter
+      MAXADMINS: 1
+      MAXPLAYERS: 10
+      PORTGAME: 9876
+      PORTQUERY: 9877
+    ports:
+      - "9876:9876/udp"
+      - "9877:9877/udp"
+
+#   Docker-Compose File: V Rising Dedicated Server
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Windows/V%20Rising
