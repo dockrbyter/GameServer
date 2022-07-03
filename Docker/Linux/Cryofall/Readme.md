@@ -9,9 +9,15 @@
 mkdir -p $HOME/cryofall
  ```
 
+#### Download Docker-Compose File
+```
+cd $HOME/cryofall
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Cryofall/docker-compose.yml docker-compose.yml
+ ```
+
 #### Run Container
 ```
-cd /path/to/your/docker-compose/file
+(cd $HOME/cryofall)
 docker-compose up
  ```
 
