@@ -25,7 +25,7 @@ docker run --name vrising --rm -p 9876:9876 -p 9877:9877 -v c:\docker\vrising\sr
  - MAXADMINS="3"
  - PORTGAME="9876"
  - PORTQUERY="9877"
- 
+   
 ### Locations
  - Serverfiles: C:\vrising\srv
  - Settings/SaveGames: C:\vrising\data
