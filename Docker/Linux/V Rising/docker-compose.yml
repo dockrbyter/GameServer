@@ -1,20 +1,17 @@
 version: "3.9"
 services:
-  valheim:
-    image: ghcr.io/lloesche/valheim-server
-    cap_add:
-      - sys_nice
+  vrising:
+    image: trueosiris/vrising
     restart: unless-stopped
+    environment:
+      - TZ=Europe/Berlin
+      - SERVERNAME=YOURvrisingSERVER
     volumes:
-      - $HOME/valheim/config:/config
-      - $HOME/valheim/data:/opt/valheim
+      - $HOME/vrising/srv:/mnt/vrising/server:rw
+      - $HOME/vrising/data:/mnt/vrising/persistentdata:rw
     ports:
-      - "-2456:2456/udp"
-      - "2457:2457/udp"
-      - "9001:9001/tcp"
-    stop_grace_period: 2m
-    env_file:
-      - $HOME/valheim-server/valheim.env
+      - '9876:9876/udp'
+      - '9877:9877/udp'
 
-#   Docker-Compose File: Valheim
+#   Docker-Compose File: V Rising
 #   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/
