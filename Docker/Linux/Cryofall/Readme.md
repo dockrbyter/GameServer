@@ -1,4 +1,7 @@
 # Cryofall Dedicated Server
+### Not my image!
+We using here the image from https://hub.docker.com/r/atomictorch/cryofall-server
+
 ## How To
 
 ##### Open Firewall Ports:
