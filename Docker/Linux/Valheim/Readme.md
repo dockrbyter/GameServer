@@ -1,6 +1,6 @@
 # Valheim Dedicated Server
 ### Not my image!
-We using here the image from https://github.com/lloesche
+We're using here the image from https://github.com/lloesche
 That's great work and theres no need to write our own image! :D
 (There is already a really good guide, check out his Docker Hub page ;)
 
