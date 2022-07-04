@@ -19,14 +19,14 @@ mkdir -p $HOME/conanexiles
 #### Download Docker-Compose File
 ```
 cd $HOME/conanexiles
-curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Valheim/docker-compose.yml docker-compose.yml
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Conan%20Exiles/docker-compose.yml docker-compose.yml
  ```
 
 #### Download .env File
 Download and edit the .env file. Theres a section, called "THINGS YOU SHOULDN'T TOUCH" - You'd better don't touch these settings... :D
 ```
 cd $HOME/conanexiles
-curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Valheim/docker-compose.yml .env
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Conan%20Exiles/.env .env
  ```
 
 ## Run Container
