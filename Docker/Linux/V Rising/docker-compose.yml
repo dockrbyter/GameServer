@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  valheim:
+    image: ghcr.io/lloesche/valheim-server
+    cap_add:
+      - sys_nice
+    restart: unless-stopped
+    volumes:
+      - $HOME/valheim/config:/config
+      - $HOME/valheim/data:/opt/valheim
+    ports:
+      - "-2456:2456/udp"
+      - "2457:2457/udp"
+      - "9001:9001/tcp"
+    stop_grace_period: 2m
+    env_file:
+      - $HOME/valheim-server/valheim.env
+
+#   Docker-Compose File: Valheim
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/
