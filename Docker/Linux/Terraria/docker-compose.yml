@@ -1,7 +1,8 @@
 version: "3.9"
 services:
-  vrising:
+  terraria:
     image: dockrbyter/terraria:latest
+    restart: unless-stopped
     volumes:
       - $HOME/terraria/terrariaserverconfig.txt:/terraria/terrariaserverconfig.txt
       - $HOME/terraria/world:/.local/share/Terraria/Worlds
