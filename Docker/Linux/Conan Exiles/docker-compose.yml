@@ -1,0 +1,16 @@
+version: "3.9"
+services:
+  conanexiles:
+    image: conanexiles
+    restart: unless-stopped
+    env_file:
+      - $HOME/conanexiles/.env
+    volumes:
+      - $HOME/conanexiles:conanexiles
+    ports:
+      - 7777:7777/udp
+       - 7778:7778/udp
+       - 27015:27015/udp
+
+#   Docker-Compose File: Conan Exiles
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/
