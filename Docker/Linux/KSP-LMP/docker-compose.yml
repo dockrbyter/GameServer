@@ -2,6 +2,7 @@ version: "3.9"
 services:
   vrising:
     image: dockrbyter/ksplmp:latest
+    restart: unless-stopped
     volumes:
       - $HOME/ksplmp:/ksp/Config
       - $HOME/ksplmp/universe:/ksp/Universe
