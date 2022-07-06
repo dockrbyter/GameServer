@@ -1,8 +1,8 @@
 version: "3.9"
 services:
   terraria:
+    container_name: terraria
     image: dockrbyter/terraria:latest
-    restart: unless-stopped
     volumes:
       - $HOME/terraria/terrariaserverconfig.txt:/terraria/terrariaserverconfig.txt
       - $HOME/terraria/world:/.local/share/Terraria/Worlds
