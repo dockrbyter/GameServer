@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   valheim:
+    container_name: valheim
     image: ghcr.io/lloesche/valheim-server
     cap_add:
       - sys_nice
