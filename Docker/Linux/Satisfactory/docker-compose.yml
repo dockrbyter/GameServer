@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  vrising:
+  satisfactory:
+    container_name: satisfactory
     image: dockrbyter/satisfactory:latest
-    restart: unless-stopped
     volumes:
       - $HOME/satisfactory:/home/steam/server
       - $HOME/satisfactory/conf:/home/steam/.config
