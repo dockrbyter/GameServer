@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   conanexiles:
+    container_name: conanexiles
     image: conanexiles
     restart: unless-stopped
     env_file:
