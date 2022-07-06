@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  vrising:
+  kspdmp:
+    container_name: kspdmp
     image: dockrbyter/kspdmp:latest
-    restart: unless-stopped
     volumes:
       - $HOME/kspdmp/config:/ksp/Config
       - $HOME/kspdmp/universe:/ksp/Universe
