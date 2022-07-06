@@ -1,8 +1,8 @@
 version: "3.9"
 services:
-  vrising:
+  arksurvivalevolved:
+    container_name: arksurvivalevolved
     image: dockrbyter/arksurvivalevolved:latest
-    restart: unless-stopped
     volumes:
       - $HOME/steam:/home/steam/.steam
       - $HOME/ark/srv1:/home/steam/server
