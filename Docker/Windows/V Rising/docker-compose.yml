@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   vrising:
+    container_name: vrising
     image: dockrbyter/vrising:latest
     volumes:
       - c:\docker\vrising\srv:c:/vrsing
