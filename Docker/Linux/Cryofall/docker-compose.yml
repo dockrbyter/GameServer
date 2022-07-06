@@ -1,6 +1,7 @@
 version: "3.9"
 services:
   cryofall:
+    container_name: cryofall
     image: atomictorch/cryofall-server:1.33.1.8
     command: loadOrNew
     restart: unless-stopped
