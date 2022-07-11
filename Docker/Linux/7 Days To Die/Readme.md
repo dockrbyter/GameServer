@@ -7,8 +7,8 @@
 ##### Open Firewall Ports:
  - 26900/TCP
  - 8080/TCP
- - 26900-26903/UDP 
- 
+ - 26900-26903/UDP
+
 #### Create Data Location
 ```
 mkdir -p $HOME/7daystodie/srv
@@ -44,11 +44,11 @@ docker run
   -p 26900:26900/tcp \
   -p 26900-26903:26900-26903/udp \
   -p 8080:8080/tcp \
-dockrbyter/7daystodie
+7daystodie
 ```
 or
 ```
-docker run --name 7daystodie -it --rm -e PORTTCP=26900 -e PORTUDP=26900-26903 -e PORTALLOCMOD=8080 -v $HOME/7daystodie/srv:/home/steam/server -v HOME/7daystodie/data:/home/steam/.local/share/7DaysToDie -v $HOME/7daystodie/srvdata:/home/steam/.config/unity3d -p 26900:26900/tcp -p 26900-26903:26900-26903/udp -p 8080:8080/tcp dockrbyter/7daystodie
+docker run --name 7daystodie -it --rm -e PORTTCP=26900 -e PORTUDP=26900-26903 -e PORTALLOCMOD=8080 -v $HOME/7daystodie/srv:/home/steam/server -v HOME/7daystodie/data:/home/steam/.local/share/7DaysToDie -v $HOME/7daystodie/srvdata:/home/steam/.config/unity3d -p 26900:26900/tcp -p 26900-26903:26900-26903/udp -p 8080:8080/tcp 7daystodie
 ```
 
 ### Docker Compose
@@ -65,9 +65,11 @@ docker-compose up
 ```
 
 ### Locations
- - Serverfiles: ~/7daystodie/srv
- - Serverfiles: ~/7daystodie/srvdata
- - Save files: ~/7daystodie/data
+ - Serverfiles: $HOME/7daystodie/srv
+ - Serverfiles: $HOME/7daystodie/srvdata
+ - Save files and Logs: $HOME/7daystodie/data
+ - Server Konfig File: $HOME/7daystodie/srv/serverconfig.xml
+ - Admin Konfig File: $HOME/7daystodie/data/Saves/serveradmin.xml
 
 ##### Links
  - https://hub.docker.com/u/dockrbyter
