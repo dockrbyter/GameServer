@@ -44,11 +44,11 @@ docker run
   -p 26900:26900/tcp \
   -p 26900-26903:26900-26903/udp \
   -p 8080:8080/tcp \
-7daystodie
+dockrbyter/7daystodie
 ```
 or
 ```
-docker run --name 7daystodie -it --rm -e PORTTCP=26900 -e PORTUDP=26900-26903 -e PORTALLOCMOD=8080 -v $HOME/7daystodie/srv:/home/steam/server -v HOME/7daystodie/data:/home/steam/.local/share/7DaysToDie -v $HOME/7daystodie/srvdata:/home/steam/.config/unity3d -p 26900:26900/tcp -p 26900-26903:26900-26903/udp -p 8080:8080/tcp 7daystodie
+docker run --name 7daystodie -it --rm -e PORTTCP=26900 -e PORTUDP=26900-26903 -e PORTALLOCMOD=8080 -v $HOME/7daystodie/srv:/home/steam/server -v HOME/7daystodie/data:/home/steam/.local/share/7DaysToDie -v $HOME/7daystodie/srvdata:/home/steam/.config/unity3d -p 26900:26900/tcp -p 26900-26903:26900-26903/udp -p 8080:8080/tcp dockrbyter/7daystodie
 ```
 
 ### Docker Compose
