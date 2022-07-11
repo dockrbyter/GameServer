@@ -25,6 +25,11 @@ Edit the config file, then copy it on the docker host to:
 $HOME/7daystodie/srv
 ```
 
+#### Environment Variables (and their defaults)
+ - PORTTCP=26900
+ - PORTUDP=26900-26903
+ - PORTALLOCMOD=8080
+
 ###### Run Container
 ```
 docker run 
