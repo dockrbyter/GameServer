@@ -1,6 +1,6 @@
 # 7 Days To Die Dedicated Server
-[![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
-[![Image Size](https://img.shields.io/docker/image-size/dockrbyter/satisfactory.svg)](https://hub.docker.com/r/dockrbyter/satisfactory)
+[![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/7daystodie.svg)](https://hub.docker.com/r/dockrbyter/7daystodie)
+[![Image Size](https://img.shields.io/docker/image-size/dockrbyter/7daystodie.svg)](https://hub.docker.com/r/dockrbyter/7daystodie)
 
 ## How To
 
