@@ -50,7 +50,7 @@ docker run --name 7daystodie -it --rm -e PORTTCP=26900 -e PORTUDP=26900-26903 -e
 ##### Download Docker Compose
 ```
 cd $HOME/7daystodie
-curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/7/docker-compose.yml docker-compose.yml
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/7%20Days%20To%20Die/docker-compose.yml docker-compose.yml
 ```
 
 ##### Run Docker Compose
