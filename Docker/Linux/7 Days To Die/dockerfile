@@ -1,0 +1,65 @@
+# 7 Days To Die Dedicated Server
+#
+# https://github.com/dockrbyter/
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+# SteamCMD Base Image
+FROM dockrbyter/steamcmd
+
+# Labels
+LABEL image.authors="dockrbyter"
+LABEL description="7 Day To Die Dedicated Server"
+LABEL "other"="https://github.com/dockrbyter"
+
+# Environment Variables
+ENV PORTTCP=26900 \
+    PORTUDP=26900-26903 \
+    PORTALLOCMOD=8080
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+USER root
+RUN dpkg --add-architecture i386 && \
+    apt update -y && \
+    apt install -y --no-install-recommends \
+    apt-transport-https \
+    ca-certificates \
+    software-properties-common \
+    dirmngr \
+    gnupg \
+    lib32gcc-s1 \
+    lib32stdc++6 \
+	libstdc++6 \
+	libstdc++6:i386 \
+    libsdl2-2.0-0:i386 \
+    mono-runtime-common \
+    gdb \
+    lldb && \
+    mkdir -p /home/steam/.local/share/7DaysToDie && \
+    mkdir -p /home/steam/.config/unity3d/The Fun Pimps  && \
+    mkdir -p /home/steam/.steam/sdk64 && \
+    chown -R "steam:steam" "/home/steam/server" && \
+    chown -R "steam:steam" "/home/steam/.config" && \
+    chown -R "steam:steam" "/home/steam/.local" && \
+    chown -R "steam:steam" "/home/steam/.steam/sdk64"
+
+USER steam
+RUN steamcmd +login anonymous +force_install_dir /home/steam/server +app_update 294420 +quit && \
+    rm /home/steam/server/steamclient.so && \
+    ln -s /home/steam/.steam/steamcmd/linux32/steamclient.so /home/steam/server/ && \
+    ln -s /home/steam/.steam/steamcmd/linux64/steamclient.so /home/steam/.steam/sdk64/
+
+COPY start7daystodie.sh /home/steam/start7daystodie.sh
+COPY serverconfig.xml /home/steam/server/serverconfig.xml
+WORKDIR "/home/steam"
+
+#-----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Volume
+VOLUME "/home/steam/server"
+VOLUME "/home/steam/.local/share/7DaysToDie"
+VOLUME "/home/steam/.config/unity3d/"
+
+# Expose Ports: 
+EXPOSE $PORTTCP/tcp $PORTUDP/udp $PORTALLOCMOD/tcp
+
+# Start Server
+CMD [ "./start7daystodie.sh" ]

@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  7daystodie:
+    container_name: 7daystodie
+    image: dockrbyter/7daystodie:latest
+    environment:
+      - PORTTCP=26900
+      - PORTUDP=26900-26903
+      - PORTALLOCMOD=8080
+    volumes:
+      - $HOME/7daystodie/srv:/home/steam/server
+      - $HOME/7daystodie/data:/home/steam/.local/share/7DaysToDie
+      - $HOME/7daystodie/srvdata:/home/steam/.config/unity3d
+    ports:
+      - "26900:26900/tcp"
+      - "26900-26903:26900-26903/udp"
+      - "8080:8080/tcp"
+
+#   Docker-Compose File: 7 Days To Die
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/7 Days To Die
