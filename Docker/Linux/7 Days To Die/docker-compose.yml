@@ -13,8 +13,8 @@ services:
       - $HOME/7daystodie/srvdata:/home/steam/.config/unity3d
     ports:
       - "26900:26900/tcp"
-      - "26900-26903:26900-26903/udp"
       - "8080:8080/tcp"
+      - "26900-26903:26900-26903/udp"
 
 #   Docker-Compose File: 7 Days To Die
 #   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/7 Days To Die
