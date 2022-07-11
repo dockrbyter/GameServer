@@ -30,7 +30,7 @@ $HOME/7daystodie/srv
  - PORTUDP=26900-26903
  - PORTALLOCMOD=8080
 
-###### Run Container
+### Run Container
 ```
 docker run 
   --name 7daystodie \
@@ -51,7 +51,7 @@ or
 docker run --name 7daystodie -it --rm -e PORTTCP=26900 -e PORTUDP=26900-26903 -e PORTALLOCMOD=8080 -v $HOME/7daystodie/srv:/home/steam/server -v HOME/7daystodie/data:/home/steam/.local/share/7DaysToDie -v $HOME/7daystodie/srvdata:/home/steam/.config/unity3d -p 26900:26900/tcp -p 26900-26903:26900-26903/udp -p 8080:8080/tcp 7daystodie
 ```
 
-###### Docker Compose
+### Docker Compose
 ##### Download Docker Compose
 ```
 cd $HOME/7daystodie
