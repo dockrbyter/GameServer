@@ -17,4 +17,4 @@ services:
       - "26900-26903:26900-26903/udp"
 
 #   Docker-Compose File: 7 Days To Die
-#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/7 Days To Die
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/7%20Days%20To%20Die
