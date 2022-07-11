@@ -6,8 +6,8 @@
 
 ##### Open Firewall Ports:
  - 26900/TCP
- - 26900-26903/UDP
- - 8080/TCP 
+ - 8080/TCP
+ - 26900-26903/UDP 
  
 #### Create Data Location
 ```
