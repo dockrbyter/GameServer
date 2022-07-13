@@ -43,6 +43,7 @@ docker run --name ark2 -it --rm -p 27021:27021/tcp -p 27017:27017/udp -p 7782:77
  - MULTIHOMEIP=0.0.0.0
  - CLUSTERDIR=/home/steam/arkcluster
  - CLUSTERID=dockrbyter
+ - USER=steam
 
 ### Locations
  - Server Files: ~/ark/srv1
