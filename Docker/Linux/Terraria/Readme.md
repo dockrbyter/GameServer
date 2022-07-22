@@ -13,7 +13,7 @@ mkdir -p $HOME/terraria/world
 
 #### Config File
 
-[Download config file](https://gist.github.com/thelamescriptkiddiemax/914ba5b4e3a9d085dacb8ff4dbe85e4b)
+[Download config file](https://gist.github.com/dockrbyter/914ba5b4e3a9d085dacb8ff4dbe85e4b)
 
 ```
 Edit the config file, then copy it on the docker host to:
