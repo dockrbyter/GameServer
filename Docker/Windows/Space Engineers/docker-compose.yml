@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  spaceengineers:
+    container_name: spaceengineers
+    image: devidian/spaceengineers
+    restart: unless-stopped
+    volumes:
+      - $HOME/spaceengineers/instances:/appdata/space-engineers/instances
+      - $HOME/spaceengineers/srv:/appdata/space-engineers/SpaceEngineersDedicated
+      - $HOME/spaceengineers/steamcmd:/root/.steam
+    environment:
+      - INSTANCE_NAME=dockrbyter
+      - WINEDEBUG=-all
+    ports:
+      - "27016:27016/udp"
+      - "8080:8080/tcp"
+
+#   Docker-Compose File: Space Engineers
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/
