@@ -13,7 +13,7 @@
 A bunch of docker files, configs and scripts to run game servers. To name a few:
  - 7 Days to Die
  - ARK: Survival Evolved
- - V Rising
+ - V Rising  
 ...and more! 
 
 ## Content
