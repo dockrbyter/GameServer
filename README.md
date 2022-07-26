@@ -17,4 +17,4 @@ A bunch of docker files, configs and scripts to run game servers. To name a few:
  - V Rising  
 ...and more! 
 
-[Check also my Docker⚓Hub profile](https://hub.docker.com/u/dockrbyter) and [my Steam guides](https://steamcommunity.com/profiles/76561198120366828/myworkshopfiles/?section=guides) 👋
+Check also my [Docker⚓Hub profile](https://hub.docker.com/u/dockrbyter) and [my Steam guides](https://steamcommunity.com/profiles/76561198120366828/myworkshopfiles/?section=guides) 👋
