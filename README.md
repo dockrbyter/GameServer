@@ -10,12 +10,11 @@
 
 ![Footer](https://github.com/dockrbyter/GameServer/blob/master/mediacontent/doky3.png?raw=true)
 
+## Content
 A bunch of docker files, configs and scripts to run game servers. To name a few:
  - 7 Days to Die
  - ARK: Survival Evolved
  - V Rising  
 ...and more! 
 
-## Content
-Some script's and Docker images to host game server's...  
 [Check also my Docker⚓Hub profile](https://hub.docker.com/u/dockrbyter) and [my Steam guides](https://steamcommunity.com/profiles/76561198120366828/myworkshopfiles/?section=guides) 👋
