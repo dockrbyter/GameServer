@@ -3,15 +3,15 @@ services:
   conanexiles:
     container_name: conanexiles
     image: alinmear/docker-conanexiles
-    restart: unless-stopped
+    restart: always
     env_file:
-      - $HOME/conanexiles/.env
+      - .env
     volumes:
       - $HOME/conanexiles/data:conanexiles
     ports:
       - 7777:7777/udp
-       - 7778:7778/udp
-       - 27015:27015/udp
+      - 7778:7778/udp
+      - 27015:27015/udp
 
 #   Docker-Compose File: Conan Exiles
 #   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/
