@@ -13,7 +13,7 @@ Docker Hub Link:    https://hub.docker.com/r/alinmear/docker-conanexiles/
 
 #### Create Data Location
 ```
-mkdir -p $HOME/conanexiles
+mkdir -p $HOME/conanexiles/data
  ```
 
 #### Download Docker-Compose File
