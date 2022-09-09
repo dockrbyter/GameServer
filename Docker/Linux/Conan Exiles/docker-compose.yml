@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.8"
 services:
   conanexiles:
     container_name: conanexiles
@@ -7,7 +7,7 @@ services:
     env_file:
       - $HOME/conanexiles/.env
     volumes:
-      - $HOME/conanexiles:conanexiles
+      - $HOME/conanexiles/data:conanexiles
     ports:
       - 7777:7777/udp
        - 7778:7778/udp
