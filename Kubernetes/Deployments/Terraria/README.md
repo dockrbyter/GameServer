@@ -28,6 +28,6 @@ kubectl apply -f deployment_terraria.yml
 ```
 
 ## LINKS
-- terraria: https://terraria.net/  
+- Terraria: https://terraria.net/  
 - Image terraria: https://hub.docker.com/r/beardedio/terraria
-- https://terraria.wiki.gg/wiki/Guide:Setting_up_a_Terraria_server
+- Terraria Server HowTo: https://terraria.wiki.gg/wiki/Guide:Setting_up_a_Terraria_server
