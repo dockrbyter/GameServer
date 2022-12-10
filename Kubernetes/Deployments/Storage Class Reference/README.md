@@ -4,3 +4,5 @@ Storage Class reference for Microk8s single node deployment. All storage objects
 ```bash
 kubectl apply -f storageclass_gameserver.yml
 ```
+
+https://microk8s.io/docs/addon-hostpath-storage
