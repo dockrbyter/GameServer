@@ -1,0 +1,27 @@
+# fivemgtav Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: fivemgtav
+spec:
+  type: NodePort
+  selector:
+    app: fivemgtav
+  ports:
+    - name: fivemgtavtcp
+      protocol: TCP
+      targetPort: 30120
+      port: 30120
+      nodePort: 30120
+    - name: fivemgtavudp
+      protocol: UDP
+      targetPort: 30120
+      port: 30120
+      nodePort: 30120
+    - name: fivemgtavweb
+      protocol: TCP
+      targetPort: 40120
+      port: 40000
+      nodePort: 40000
+# TargetPort: Container Port
+# Port: Externer Port
