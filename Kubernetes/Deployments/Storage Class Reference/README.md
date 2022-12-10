@@ -2,6 +2,7 @@
 
 Storage Class reference for Microk8s single node deployment. All storage objects will be mounted at `/mk8sstorage/gameserver/`.
 ```bash
+mkdir -p /mk8sstorage/gameserver
 kubectl apply -f storageclass_gameserver.yml
 ```
 
