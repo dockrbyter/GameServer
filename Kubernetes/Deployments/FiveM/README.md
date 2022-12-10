@@ -56,6 +56,6 @@ kubectl apply -f deployment_mysql.yml
 - Image MySQL: https://hub.docker.com/_/mysql  
 - ServerKey: https://keymaster.fivem.net/  
 - ServerKey HowTo: https://forum.cfx.re/t/explained-how-to-make-add-a-server-key/56120
-- https://txadm.in/
-- https://docs.fivem.net/docs/resources/txAdmin/
+- TxAdmin: https://txadm.in/
+- TxAdmin docs: https://docs.fivem.net/docs/resources/txAdmin/
 
