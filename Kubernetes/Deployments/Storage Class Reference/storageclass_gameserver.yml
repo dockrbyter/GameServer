@@ -1,0 +1,11 @@
+# Game Server StorageClass
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: gameserver
+provisioner: microk8s.io/hostpath
+reclaimPolicy: Retain
+parameters:
+  pvDir: /mk8sstorage/gameserver
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
