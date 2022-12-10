@@ -1,0 +1,17 @@
+# Terraria Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: terraria
+spec:
+  type: NodePort
+  selector:
+    app: terraria
+  ports:
+    - name: terraria
+      protocol: TCP
+      targetPort: 7777
+      port: 7777
+      nodePort: 7777
+# TargetPort: Container Port
+# Port: External Port
