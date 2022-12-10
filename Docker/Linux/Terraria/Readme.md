@@ -1,6 +1,9 @@
 # Terraria Dedicated Server
 [![Docker Pulls](https://img.shields.io/docker/pulls/dockrbyter/terraria.svg)](https://hub.docker.com/r/dockrbyter/terraria)
 [![Image Size](https://img.shields.io/docker/image-size/dockrbyter/terraria.svg)](https://hub.docker.com/r/dockrbyter/terraria)
+
+⚠️⚠️⚠️ Deprecated! ⚠️⚠️⚠️ Use https://hub.docker.com/r/beardedio/terraria | https://github.com/beardedio/terraria instead ⚠️⚠️⚠️  
+
 ## How To
 
 ##### Open Firewall Ports:
