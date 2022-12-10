@@ -3,7 +3,7 @@
 #### BATTERIES NOT INCLUDED!
 You may want to create an Ingress for TxAdmin WebGUI, but it's just need for the initial setup. After that you could make yourselfe to an admin and use the ingame pannel so you don't the WebGUI any more. To open the ingame pannel press `t` and type `/txadmin`.
   
-You'll also need a free license key. [Click here](https://forum.cfx.re/t/explained-how-to-make-add-a-server-key/56120) to find out how to get one. At `Server IP address` set the external IP of your Cluster.  
+You'll also need a free license key. [Click here](https://forum.cfx.re/t/explained-how-to-make-add-a-server-key/56120) to find out how to get one. At `Server IP address` set the external IP of your cluster.  
 
 ### PREAMBLE
 
