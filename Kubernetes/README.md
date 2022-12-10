@@ -1,5 +1,5 @@
 # Kubernetes
- Run you game servers on a Kubernetes cluster! ⚓  
+ Run your game servers on a Kubernetes cluster! ⚓  
  
  ## LINKS
  - https://kubernetes.io/docs/home/
