@@ -50,7 +50,7 @@ kubectl apply -f deployment_fivem.yml
 kubectl apply -f deployment_mysql.yml
 ```
 
-# LINKS
+## LINKS
 - FiveM: https://fivem.net/  
 - Image FiveM: https://hub.docker.com/r/spritsail/fivem  
 - Image MySQL: https://hub.docker.com/_/mysql  
