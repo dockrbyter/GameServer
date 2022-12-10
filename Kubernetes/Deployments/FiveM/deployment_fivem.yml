@@ -1,0 +1,55 @@
+---
+# fivemgtav Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fivemgtav
+  labels:
+    app: fivemgtav
+    name: fivemgtav
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fivemgtav
+      task: fivemgtav
+  template:
+    metadata:
+      labels:
+        app: fivemgtav
+        task: fivemgtav
+    spec:
+      containers:
+        - name: fivemgtav
+          image: spritsail/fivem:6124
+          tty: true
+          resources:
+            limits:
+              cpu: "6"
+              memory: 16Gi
+            requests:
+              cpu: "4"
+              memory: 8Gi
+          ports:
+            - containerPort: 30120
+            - containerPort: 40120
+          env:
+            - name: NO_DEFAULT_CONFIG
+              value: 'X'
+            - name: LICENSE_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: fivemsecret
+                  key: LICENSE_KEY
+          volumeMounts:
+            - name: fivemgtav-pvc
+              mountPath: /config
+            - name: fivemgtavtxt-pvc
+              mountPath: /txData
+      volumes:
+        - name: fivemgtav-pvc
+          persistentVolumeClaim:
+            claimName: fivemgtav-pvc
+        - name: fivemgtavtxt-pvc
+          persistentVolumeClaim:
+            claimName: fivemgtavtxt-pvc
