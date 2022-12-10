@@ -29,7 +29,7 @@ echo -n 'SUP3RST0NGP@ssW04D' | base64
 Copy the output into `secret_mysql.yml` at `MYSQL_ROOT_PASSWORD`.  
 
 ### PORTS
-Check the Ports in `service_fivem.yml` and `service_mysql.yml` to adjust them as you need it.  
+Check the ports in `service_fivem.yml` and `service_mysql.yml` to adjust them as you need it.  
 
 ### RESOURCES
 Edit the resources spec in `deployment_fivem.yml` acording to your cluster.  
@@ -56,3 +56,6 @@ kubectl apply -f deployment_mysql.yml
 - Image MySQL: https://hub.docker.com/_/mysql  
 - ServerKey: https://keymaster.fivem.net/  
 - ServerKey HowTo: https://forum.cfx.re/t/explained-how-to-make-add-a-server-key/56120
+- https://txadm.in/
+- https://docs.fivem.net/docs/resources/txAdmin/
+
