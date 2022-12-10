@@ -35,7 +35,7 @@ Check the Ports in `service_fivem.yml` and `service_mysql.yml` to adjust them as
 Edit the resources spec in `deployment_fivem.yml` acording to your cluster.  
 
 ### STORAGE
-Edit `pvc_fivem.yml` and `pvc_fivemtxt.yml` (and also `pvc_mysql.yml` if you using this MySQL deployment) acording to your Clusters storage system.
+Edit `pvc_fivem.yml` and `pvc_fivemtxt.yml` (and also `pvc_mysql.yml` if you using this MySQL deployment) acording to your clusters storage system.
 
 ### APPLY FILES
 ```bash
