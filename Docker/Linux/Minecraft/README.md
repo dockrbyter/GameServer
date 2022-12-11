@@ -19,6 +19,8 @@ cd $HOME/minecraft
 curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Minecraft/docker-compose.yml docker-compose.yml
 ```
 
+Edit the environment variable `OPS=YOURingameNAME` to your MC nickname.
+
 ## Run Container
 ```
 (cd $HOME/minecraft)
