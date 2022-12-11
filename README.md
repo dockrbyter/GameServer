@@ -17,4 +17,6 @@ A bunch of docker files, configs and scripts to run game servers. To name a few:
  - V Rising  
 ...and more! 
 
+Don't mind if some Dockerfile seems to be outdated. The image itself will perform updates via SteamCMD.
+
 Check also my [Docker⚓Hub profile](https://hub.docker.com/u/dockrbyter) and my [Steam guides](https://steamcommunity.com/profiles/76561198120366828/myworkshopfiles/?section=guides) 👋
