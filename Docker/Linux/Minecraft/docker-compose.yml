@@ -1,0 +1,23 @@
+version: '3'
+services:
+  minecraft:
+    container_name: minecraft
+    image:  itzg/minecraft-server
+    restart: always
+    volumes:
+      - $HOME/minecraft/data:/data
+    environment:
+      - EULA=TRUE
+      - TYPE=CURSEFORGE
+      - CF_SERVER_MOD=ATM7-0.4.32-server.zip
+      - OPS=DtHitch
+    tty: true
+    stdin_open: true
+    ports:
+      - 25565:25565
+
+# Minecraft
+# https://hub.docker.com/r/itzg/minecraft-server
+# https://github.com/itzg/docker-minecraft-server
+# https://github.com/itzg/docker-minecraft-server#running-a-server-with-a-curseforge-modpack
+# https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/Minecraft
