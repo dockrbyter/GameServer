@@ -10,7 +10,7 @@ services:
       - EULA=TRUE
       - TYPE=CURSEFORGE
       - CF_SERVER_MOD=ATM7-0.4.32-server.zip
-      - OPS=DtHitch
+      - OPS=YOURingameNAME
     tty: true
     stdin_open: true
     ports:
