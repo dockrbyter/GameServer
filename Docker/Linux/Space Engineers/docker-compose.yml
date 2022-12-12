@@ -1,0 +1,20 @@
+version: "3.8"
+services:
+  spaceengineers:
+    image: devidian/spaceengineers:latest
+    container_name: spaceengineers
+    environment:
+      - INSTANCE_NAME=MaximilianNetwork
+      - PUBLIC_IP=0.0.0.0
+      - WINEDEBUG=-all
+    volumes:
+      - "$HOME/spaceengineers/data/instances:/appdata/space-engineers/instances"
+      - "$HOME/spaceengineers/data/srv:/appdata/space-engineers/SpaceEngineersDedicated"
+      - "$HOMEs/spaceengineers/data/steamcmd:/root/.steam"
+    ports:
+      - "27016:27016/udp"
+
+#   Docker-Compose File: Space Engineers
+#   https://github.com/dockrbyter/GameServer
+#   https://github.com/Devidian/docker-spaceengineers
+#   https://hub.docker.com/r/devidian/spaceengineers/
