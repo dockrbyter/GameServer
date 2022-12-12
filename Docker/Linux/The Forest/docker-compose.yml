@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  theforest:
+    image: jammsen/the-forest-dedicated-server:latest
+    container_name: theforest
+    environment:
+      - SERVER_STEAM_ACCOUNT_TOKEN=YOUR_TOKEN_HERE
+    volumes:
+      - "$HOME/theforest/data/srv:/theforest"
+      - "$HOME/theforest/data/winedata:/winedata"
+      - "$HOMEs/theforest/data/steamcmd:/steamcmd"
+    ports:
+      - 8766:8766/tcp
+      - 8766:8766/udp
+      - 27015:27015/tcp
+      - 27015:27015/udp
+      - 27016:27016/tcp
+      - 27016:27016/udp
+
+#   Docker-Compose File: The Forest
+#   https://github.com/dockrbyter/GameServer
+#   https://github.com/jammsen/docker-the-forest-dedicated-server
+#   https://hub.docker.com/r/jammsen/the-forest-dedicated-server
