@@ -10,7 +10,9 @@ Docker Hub Link:    https://hub.docker.com/r/mmmaxwwwell/space-engineers-dedicat
 #### Create Data Location
 Space Engineers is a little more tricky than other Images. So follow these steps and you may get cour container running 🫠
 ```bash
-mkdir -p $HOME/spaceengineers/data
+mkdir -p $HOME/spaceengineers/data/instances
+mkdir -p $HOME/spaceengineers/data/srv
+mkdir -p $HOME/spaceengineers/data/steamcmd
 ```
 
 #### Download Docker-Compose File
