@@ -18,7 +18,7 @@ mkdir -p $HOME/spaceengineers/data/steamcmd
 #### Download Docker-Compose File
 ```bash
 cd $HOME/spaceengineers
-curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Minecraft/docker-compose.yml docker-compose.yml
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Space%20Engineers/docker-compose.yml docker-compose.yml
 ```
 
 ## Run Container
