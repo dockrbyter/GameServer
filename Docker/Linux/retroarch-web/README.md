@@ -17,7 +17,7 @@ docker run -d --rm --name retroarch-web -p 80:80 dockrbyter/retroarch-web:latest
 ```bash
 mkdir -p $HOME/retroarch-web
 cd $HOME/retroarch-web
-curl https://raw.githubusercontent.com/dockrbyter/retroarch-web/master/docker-compose.yml docker-compose.yml
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/retroarch-web/docker-compose.yml docker-compose.yml
 ```
 
 #### RUN DOCKER COMPOSE FILE
