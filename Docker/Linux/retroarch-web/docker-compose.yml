@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  retroarch-web:
+    container_name: retroarch-web
+    image: dockrbyter/retroarch-web:latest
+    ports:
+      - "80:80/tcp"
+
+#   Docker-Compose File: retroarch-web
+#   https://github.com/dockrbyter/retroarch-web
