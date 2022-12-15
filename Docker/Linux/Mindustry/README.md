@@ -8,6 +8,7 @@ Docker Hub Link:    https://hub.docker.com/r/oldshensheep/mindustry-server
 ### FIREWALL
 Open Ports:
  - 6567/UDP
+ - 6567/TCP
 
 ### DOCKER COMPOSE
 #### DOWNLOAD DOCKER COMPOSE FILE
