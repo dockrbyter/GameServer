@@ -1,0 +1,13 @@
+version: "3.8"
+services:
+  mindustry:
+    container_name: mindustry
+    image: dockrbyter/retroarch-web:latest
+    volumes:
+      - "$HOME/mindustry/data:/opt/mindustry/config"
+    ports:
+      - "6567:6567/udp"
+      - "6567:6567/tcp"
+
+#   Docker-Compose File: Mindustry
+#   https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux  
