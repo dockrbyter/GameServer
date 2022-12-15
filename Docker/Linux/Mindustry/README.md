@@ -15,7 +15,7 @@ Open Ports:
 ```bash
 mkdir -p $HOME/mindustry/data
 cd $HOME/mindustry
-curl https://raw.githubusercontent.com/dockrbyter/retroarch-web/master/docker-compose.yml docker-compose.yml
+curl https://raw.githubusercontent.com/dockrbyter/GameServer/master/Docker/Linux/Mindustry/docker-compose.yml docker-compose.yml
 ```
 
 #### RUN DOCKER COMPOSE FILE
