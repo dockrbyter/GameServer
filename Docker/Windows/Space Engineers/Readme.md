@@ -4,7 +4,9 @@
 Contributers welcome! I don't get it to start.  
 Here's my work so far...  
 
-The container starts up and after two or three minutes the servcies fails and the container keeps running. The srv directory will be written with data, but the container do not write in the world directory. I can't find any logs.
+The container starts up and after two or three minutes the servcies fails and the container keeps running. The srv directory will be written with data, but the container do not write in the world directory. I can't find any logs.  
+
+If you just need a working Space Engineers container, go to https://github.com/dockrbyter/GameServer/tree/master/Docker/Linux/Space%20Engineers  
 
 ## Testing Only
 ## How To
