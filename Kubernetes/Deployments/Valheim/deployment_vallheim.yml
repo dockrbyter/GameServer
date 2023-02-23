@@ -1,0 +1,116 @@
+# VALHEIM Deployment
+# https://github.com/dockrbyter/GameServer/tree/master/Kubernetes/Deployments/Valheim
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: valheim-config-pvc
+spec:
+  storageClassName: gameserver
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 1Gi } }
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: valheim-data-pvc
+spec:
+  storageClassName: gameserver
+  accessModes: [ReadWriteOnce]
+  resources: { requests: { storage: 50Gi } }
+
+---
+# valheim Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: valheim
+spec:
+  type: NodePort
+  selector:
+    app: valheim
+  ports:
+    - name: valheim1
+      protocol: TCP
+      targetPort: 9001
+      port: 9001
+      nodePort: 9001
+    - name: valheim2
+      protocol: UDP
+      targetPort: 2456
+      port: 2456
+      nodePort: 2456
+    - name: valheim3
+      protocol: UDP
+      targetPort: 2457
+      port: 2457
+      nodePort: 2457
+# TargetPort: Container Port
+# Port: External Port
+
+---
+# valheim Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: valheim
+  labels:
+    app: valheim
+    name: valheim
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: valheim
+      task: valheim
+  template:
+    metadata:
+      labels:
+        app: valheim
+        task: valheim
+    spec:
+      containers:
+        - name: valheim
+          image: ghcr.io/lloesche/valheim-server
+          resources:
+            limits:
+              cpu: "8"
+              memory: 8Gi
+            requests:
+              cpu: "0.5"
+              memory: 1Gi
+          ports:
+            - containerPort: 2456
+            - containerPort: 2457
+            - containerPort: 9001
+          env:
+            - name: SERVER_NAME
+              value: 'maximilian.network'
+            - name: WORLD_NAME
+              value: 'maximiliannetwork'
+            - name: SERVER_PASS
+              value: 'maximiliannetwork'
+            - name: TZ
+              value: 'CET'
+            - name: UPDATE_IF_IDLE
+              value: 'true'
+            - name: VALHEIM_LOG_FILTER_CONTAINS_Spawned
+              value: 'Got character ZDOID from'
+            - name: ON_VALHEIM_LOG_FILTER_CONTAINS
+              value: '{ read l; l=${l//*ZDOID from /}; l=${l// :*/}; msg="Player $l spawned into the world"; curl -sfSL -X POST -H "Content-Type: application/json" -d "{\"username\":\"Valheim\",\"content\":\"$msg\"}" "$DISCORD_WEBHOOK"; }'
+            - name: DISCORD_WEBHOOK
+              value: 'https://discordapp.com/api/webhooks/YOUR-super_strange-W3bh00k-ID'
+          volumeMounts:
+            - name: valheim-data-pvc
+              mountPath: /config
+            - name: valheim-data-pvc
+              mountPath: /opt/valheim
+      volumes:
+        - name: valheim-config-pvc
+          persistentVolumeClaim:
+            claimName: valheim-config-pvc
+        - name: valheim-data-pvc
+          persistentVolumeClaim:
+            claimName: valheim-config-pvc
